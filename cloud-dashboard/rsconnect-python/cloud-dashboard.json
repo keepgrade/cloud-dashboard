@@ -1,0 +1,12 @@
+{
+    "https://api.shinyapps.io": {
+        "server_url": "https://api.shinyapps.io",
+        "filename": "C:\\Users\\User\\Desktop\\AI_QA\\cloud-dashboard",
+        "app_url": "https://huhhuhman.shinyapps.io/cloud-dashboard/",
+        "app_id": "16421977",
+        "app_guid": null,
+        "title": "cloud-dashboard",
+        "app_mode": "python-shiny",
+        "app_store_version": 1
+    }
+}
