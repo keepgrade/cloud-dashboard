@@ -1,0 +1,713 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>정책 정의서 (Policy Definition)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2e8c434b-f602-8024-a836-e473bbad225d" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">📜</span></div><h1 class="page-title" dir="auto">정책 정의서 (Policy Definition)</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="ltr"><figure id="2e8c434b-f602-808e-b08f-df10870ab653"><div class="source"><a href="%EC%A0%95%EC%B1%85_%EC%A0%95%EC%9D%98%EC%84%9C_(Policy_Definition).md">정책 정의서 (Policy Definition).md</a></div></figure></div><div style="display:contents" dir="auto"><h2 id="2e8c434b-f602-8084-a5c7-f7d655bfe844" class="">1. 문서 개요</h2></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-80f0-b164-f85b849e5024" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8077-b060-d697b6a5027c"><th id="kIg&lt;" class="simple-table-header-color simple-table-header">항목</th><th id="\[~U" class="simple-table-header-color simple-table-header">내용</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80b8-a9df-c96dd2729e50"><td id="kIg&lt;" class=""><strong>프로젝트명</strong></td><td id="\[~U" class="">가비아 클라우드 서비스 지표 대시보드</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8097-8e3f-e4d8002bc293"><td id="kIg&lt;" class=""><strong>작성자</strong></td><td id="\[~U" class="">Ted(신태선) - 클라우드기획팀</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80ec-9c5c-df01e67a3649"><td id="kIg&lt;" class=""><strong>작성일</strong></td><td id="\[~U" class="">2026-01-14</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8064-8a9c-d8e19bbd4ba5"><td id="kIg&lt;" class=""><strong>버전</strong></td><td id="\[~U" class="">v1.0</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-8035-b2d6-c276ab1901ac"/></div><div style="display:contents" dir="auto"><h2 id="2e8c434b-f602-8076-88e7-ddd5c0957f18" class="">2. 필터링 정책</h2></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-80a7-91f7-d0726d4476ed" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80f4-960a-d9f62070ed3f"><th id="~GGf" class="simple-table-header-color simple-table-header">정책 ID</th><th id="hAMm" class="simple-table-header-color simple-table-header">정책명</th><th id="bYzX" class="simple-table-header-color simple-table-header">정책 상세</th><th id="eNw&gt;" class="simple-table-header-color simple-table-header">비고</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80b1-b167-d98b31ca1b7e"><td id="~GGf" class="">POL-F001</td><td id="hAMm" class="">월 과금 범위 필터</td><td id="bYzX" class=""><code>monthly_cost_krw BETWEEN (min, max)</code> 조건으로 필터링. <strong>경계값 포함</strong></td><td id="eNw&gt;" class="">슬라이더 사용</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-809b-8feb-e7fc715e251e"><td id="~GGf" class="">POL-F002</td><td id="hAMm" class="">트래픽 구간 필터</td><td id="bYzX" class=""><code>traffic_window IN (selected_values)</code> 조건으로 필터링</td><td id="eNw&gt;" class="">체크박스 다중선택</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-806b-8616-cbca038ec2be"><td id="~GGf" class="">POL-F003</td><td id="hAMm" class="">필터 결합 방식</td><td id="bYzX" class="">모든 필터 조건은 <strong>AND</strong> 조건으로 결합</td><td id="eNw&gt;" class=""><code>idx1 &amp; idx2</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80b4-99b6-ce50b8bcccad"><td id="~GGf" class="">POL-F004</td><td id="hAMm" class="">필터 기본값 - 슬라이더</td><td id="bYzX" class="">데이터의 전체 범위 <code>(min, max)</code></td><td id="eNw&gt;" class="">최초 로드 시</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-802b-89bb-e8d5b96a5613"><td id="~GGf" class="">POL-F005</td><td id="hAMm" class="">필터 기본값 - 체크박스</td><td id="bYzX" class=""><code>[&quot;BUSINESS&quot;, &quot;PEAK&quot;]</code> 모두 선택</td><td id="eNw&gt;" class="">최초 로드 시</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8012-ba3e-c5cf937c895c"><td id="~GGf" class="">POL-F006</td><td id="hAMm" class="">필터 초기화</td><td id="bYzX" class="">버튼 클릭 시 모든 필터를 기본값으로 복원</td><td id="eNw&gt;" class="">reset 버튼</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-8048-9153-d8b198b2b0df"/></div><div style="display:contents" dir="auto"><h2 id="2e8c434b-f602-80c1-8013-f5bc00432a40" class="">3. 데이터 계산 정책</h2></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-80c3-97ae-f651e1f88e9c" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8062-aae9-c36bed9c8773"><th id="t;M]" class="simple-table-header-color simple-table-header">정책 ID</th><th id="ow[|" class="simple-table-header-color simple-table-header">항목</th><th id="reAM" class="simple-table-header-color simple-table-header">계산 공식</th><th id="fVMD" class="simple-table-header-color simple-table-header">예외 처리</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-808c-979a-e99d0d8a8930"><td id="t;M]" class="">POL-D001</td><td id="ow[|" class="">오버리지 비중</td><td id="reAM" class=""><code>overage_ratio = overage_cost_krw ÷ monthly_cost_krw</code></td><td id="fVMD" class="">분모가 0이면 <strong>NULL</strong> 처리</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80cc-b833-d4992e2165a3"><td id="t;M]" class="">POL-D002</td><td id="ow[|" class="">조회 건수</td><td id="reAM" class=""><code>len(filtered_dataframe)</code></td><td id="fVMD" class="">0 포함 표시</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80a4-8c8d-e22644270f48"><td id="t;M]" class="">POL-D003</td><td id="ow[|" class="">평균 오버리지 비중</td><td id="reAM" class=""><code>mean(overage_ratio)</code></td><td id="fVMD" class="">NULL 값 제외 후 계산, 유효값 없으면 &quot;-&quot;</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8046-aa80-ea47a48a589b"><td id="t;M]" class="">POL-D004</td><td id="ow[|" class="">평균 월 과금</td><td id="reAM" class=""><code>mean(monthly_cost_krw)</code></td><td id="fVMD" class="">유효값 없으면 &quot;-&quot;</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-80ea-8d01-c23e8b5142a0"/></div><div style="display:contents" dir="auto"><h2 id="2e8c434b-f602-8021-af42-f0da57889f4c" class="">4. 표시 형식 정책</h2></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-80ea-b876-e94e81ae300f" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8063-a026-d6f5243a1dae"><th id=";X|l" class="simple-table-header-color simple-table-header">정책 ID</th><th id="O~Qz" class="simple-table-header-color simple-table-header">항목</th><th id="s;ZX" class="simple-table-header-color simple-table-header">형식</th><th id="?^bW" class="simple-table-header-color simple-table-header">예시</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8009-8381-cfc8a3c3e2c4"><td id=";X|l" class="">POL-V001</td><td id="O~Qz" class="">월 과금 금액</td><td id="s;ZX" class="">원화 기호 + 천단위 콤마 + 정수</td><td id="?^bW" class=""><code>₩1,234,567</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-805b-bf3e-f6fe564c6a10"><td id=";X|l" class="">POL-V002</td><td id="O~Qz" class="">오버리지 비중</td><td id="s;ZX" class="">백분율 + 소수점 1자리</td><td id="?^bW" class=""><code>12.5%</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-802c-8fbc-d830b1a7ad3b"><td id=";X|l" class="">POL-V003</td><td id="O~Qz" class="">조회 건수</td><td id="s;ZX" class="">정수</td><td id="?^bW" class=""><code>1,234</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8083-a317-d988a2483fc8"><td id=";X|l" class="">POL-V004</td><td id="O~Qz" class="">슬라이더 접두어</td><td id="s;ZX" class="">원화 기호</td><td id="?^bW" class=""><code>₩</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8019-a196-e99ef0ee920f"><td id=";X|l" class="">POL-V005</td><td id="O~Qz" class="">빈 데이터 지표</td><td id="s;ZX" class="">하이픈</td><td id="?^bW" class=""><code>-</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80e0-9f29-c0f02ef1935f"><td id=";X|l" class="">POL-V006</td><td id="O~Qz" class="">빈 데이터 차트</td><td id="s;ZX" class="">안내 메시지</td><td id="?^bW" class=""><code>필터 결과가 없습니다.</code></td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-808d-92c6-dd9d6a2d6a6e"/></div><div style="display:contents" dir="auto"><h2 id="2e8c434b-f602-801f-81f0-f597aa3c5465" class="">5. 차트 정책</h2></div><div style="display:contents" dir="auto"><h3 id="2e8c434b-f602-80fc-b5c2-d3ee46dbb040" class="">5.1 공통 정책</h3></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-8002-8914-cdab18272cc3" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80a4-86e5-f9309999c625"><th id="]kKo" class="simple-table-header-color simple-table-header">정책 ID</th><th id="HhBC" class="simple-table-header-color simple-table-header">항목</th><th id="@ruJ" class="simple-table-header-color simple-table-header">설정값</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80aa-a975-c53915a6f2b2"><td id="]kKo" class="">POL-C001</td><td id="HhBC" class="">차트 테마</td><td id="@ruJ" class=""><code>seaborn whitegrid</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8011-b2ef-e4cb43a4b3e8"><td id="]kKo" class="">POL-C002</td><td id="HhBC" class="">빈 데이터 처리</td><td id="@ruJ" class="">메시지 중앙 표시 + 축 숨김 (<code>set_axis_off</code>)</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8050-a7cd-c52102da3320"><td id="]kKo" class="">POL-C003</td><td id="HhBC" class="">레이아웃</td><td id="@ruJ" class=""><code>fig.tight_layout()</code> 적용</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h3 id="2e8c434b-f602-808c-b903-f8ddd07e57dc" class="">5.2 데이터 테이블 정책</h3></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-8019-aff9-f3d2e56eae77" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-809c-9b37-d6466b9f0592"><th id="p[q\" class="simple-table-header-color simple-table-header">정책 ID</th><th id="O;w?" class="simple-table-header-color simple-table-header">항목</th><th id="PZW:" class="simple-table-header-color simple-table-header">설정값</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8063-83e4-d753f3acacbd"><td id="p[q\" class="">POL-C010</td><td id="O;w?" class="">최대 표시 행 수</td><td id="PZW:" class=""><strong>200행</strong> (<code>.head(200)</code>)</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8001-aad2-ebd2a64e10cb"><td id="p[q\" class="">POL-C011</td><td id="O;w?" class="">컴포넌트 타입</td><td id="PZW:" class=""><code>DataGrid</code></td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h3 id="2e8c434b-f602-80e9-a81d-e237a048c284" class="">5.3 산점도 정책</h3></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-80ce-ac47-f9778b078b81" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8094-8aee-dfa4f4e6596b"><th id="^gHH" class="simple-table-header-color simple-table-header">정책 ID</th><th id="vFld" class="simple-table-header-color simple-table-header">항목</th><th id="b&gt;lr" class="simple-table-header-color simple-table-header">설정값</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8026-b120-e7fd71d2c0c8"><td id="^gHH" class="">POL-C020</td><td id="vFld" class="">차트 크기</td><td id="b&gt;lr" class=""><code>figsize=(7.2, 4.2)</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8013-80de-d7274fdbb80a"><td id="^gHH" class="">POL-C021</td><td id="vFld" class="">점 크기</td><td id="b&gt;lr" class=""><code>s=35</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8031-a59a-e52db743f058"><td id="^gHH" class="">POL-C022</td><td id="vFld" class="">점 투명도</td><td id="b&gt;lr" class=""><code>alpha=0.75</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-804d-b92f-e1286bc4d69d"><td id="^gHH" class="">POL-C023</td><td id="vFld" class="">점 테두리</td><td id="b&gt;lr" class=""><code>edgecolor=&quot;none&quot;</code> (없음)</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80cb-b86f-fc39bbdd2b67"><td id="^gHH" class="">POL-C024</td><td id="vFld" class="">X축</td><td id="b&gt;lr" class=""><code>monthly_cost_krw</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8093-835a-f49b60c026bc"><td id="^gHH" class="">POL-C025</td><td id="vFld" class="">Y축</td><td id="b&gt;lr" class=""><code>overage_cost_krw</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8021-875e-e4b0a5c6be37"><td id="^gHH" class="">POL-C026</td><td id="vFld" class="">기본 색상 모드</td><td id="b&gt;lr" class=""><code>none</code> (단색)</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8032-a3d6-ebb58faa82b9"><td id="^gHH" class="">POL-C027</td><td id="vFld" class="">범례 위치</td><td id="b&gt;lr" class=""><code>loc=&quot;best&quot;</code> (자동)</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h3 id="2e8c434b-f602-8064-8f10-cd79386c4269" class="">5.4 산점도 색상 옵션 정책</h3></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-80d7-87e7-c6c22750c138" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8096-b7d3-c5217052a56d"><th id="HObF" class="simple-table-header-color simple-table-header">정책 ID</th><th id="~IXZ" class="simple-table-header-color simple-table-header">옵션값</th><th id="DPsR" class="simple-table-header-color simple-table-header">설명</th><th id="a@Ob" class="simple-table-header-color simple-table-header">hue 파라미터</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8043-b950-e888b82ce5f2"><td id="HObF" class="">POL-C030</td><td id="~IXZ" class=""><code>none</code></td><td id="DPsR" class="">색상 구분 없음 (기본값)</td><td id="a@Ob" class="">미적용</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-809b-a963-fcd2cf324e9a"><td id="HObF" class="">POL-C031</td><td id="~IXZ" class=""><code>customer_segment</code></td><td id="DPsR" class="">고객 세그먼트별 색상</td><td id="a@Ob" class=""><code>hue=&quot;customer_segment&quot;</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8078-90e2-ebc99837451c"><td id="HObF" class="">POL-C032</td><td id="~IXZ" class=""><code>promo_applied</code></td><td id="DPsR" class="">프로모션 적용 여부별 색상</td><td id="a@Ob" class=""><code>hue=&quot;promo_applied&quot;</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8066-b71d-e445cf157d05"><td id="HObF" class="">POL-C033</td><td id="~IXZ" class=""><code>weekday</code></td><td id="DPsR" class="">요일별 색상</td><td id="a@Ob" class=""><code>hue=&quot;weekday&quot;</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-808b-9515-f35c140baf47"><td id="HObF" class="">POL-C034</td><td id="~IXZ" class=""><code>traffic_window</code></td><td id="DPsR" class="">트래픽 구간별 색상</td><td id="a@Ob" class=""><code>hue=&quot;traffic_window&quot;</code></td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h3 id="2e8c434b-f602-80c2-a42f-ec81c182fd2c" class="">5.5 바이올린 플롯 정책</h3></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-808d-b3cb-e041d95ff985" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8022-b288-ef499ea0433c"><th id="[tGc" class="simple-table-header-color simple-table-header">정책 ID</th><th id="MAgx" class="simple-table-header-color simple-table-header">항목</th><th id="&gt;oRS" class="simple-table-header-color simple-table-header">설정값</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-806d-9228-d30e5b0c54f9"><td id="[tGc" class="">POL-C040</td><td id="MAgx" class="">차트 크기</td><td id="&gt;oRS" class=""><code>figsize=(10.5, 4.2)</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8027-b210-de2bc063cd23"><td id="[tGc" class="">POL-C041</td><td id="MAgx" class="">내부 표시</td><td id="&gt;oRS" class=""><code>inner=&quot;box&quot;</code> (박스플롯)</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8061-b4d0-dc275445d264"><td id="[tGc" class="">POL-C042</td><td id="MAgx" class="">꼬리 절단</td><td id="&gt;oRS" class=""><code>cut=0</code> (데이터 범위만 표시)</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8063-ab55-fc9433daac41"><td id="[tGc" class="">POL-C043</td><td id="MAgx" class="">Y축</td><td id="&gt;oRS" class=""><code>overage_ratio</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-801a-a7db-c6e6a418252f"><td id="[tGc" class="">POL-C044</td><td id="MAgx" class="">기본 그룹 기준</td><td id="&gt;oRS" class=""><code>weekday</code> (요일)</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h3 id="2e8c434b-f602-80a2-b2e6-f0d973cb9b26" class="">5.6 바이올린 플롯 그룹 옵션 정책</h3></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-801c-a2b6-f3095c2a689e" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80d3-aa26-ccf432cabb20"><th id="I{\g" class="simple-table-header-color simple-table-header">정책 ID</th><th id="bkJ&gt;" class="simple-table-header-color simple-table-header">옵션값</th><th id="Lv`Y" class="simple-table-header-color simple-table-header">설명</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-804d-ba6c-f0871123c958"><td id="I{\g" class="">POL-C050</td><td id="bkJ&gt;" class=""><code>customer_segment</code></td><td id="Lv`Y" class="">고객 세그먼트별 분포</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-801a-85a7-e9b969af4bfa"><td id="I{\g" class="">POL-C051</td><td id="bkJ&gt;" class=""><code>promo_applied</code></td><td id="Lv`Y" class="">프로모션 적용 여부별 분포</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80ea-9136-dc4e7341a5f5"><td id="I{\g" class="">POL-C052</td><td id="bkJ&gt;" class=""><code>weekday</code></td><td id="Lv`Y" class="">요일별 분포 (기본값)</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80fa-bae9-cba45cd8cd28"><td id="I{\g" class="">POL-C053</td><td id="bkJ&gt;" class=""><code>traffic_window</code></td><td id="Lv`Y" class="">트래픽 구간별 분포</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-80ee-8ac2-c87caca09c0a"/></div><div style="display:contents" dir="auto"><h2 id="2e8c434b-f602-8068-b7c3-e1f0eb090058" class="">6. UI/UX 정책</h2></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-800b-85f7-d5bc37244f13" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-806f-a25a-dd6764ce294f"><th id="bjJw" class="simple-table-header-color simple-table-header">정책 ID</th><th id="~]n}" class="simple-table-header-color simple-table-header">구성요소</th><th id=";lA{" class="simple-table-header-color simple-table-header">정책 상세</th><th id="l|LV" class="simple-table-header-color simple-table-header">설정값</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-800e-81ca-c08fd37dad7e"><td id="bjJw" class="">POL-U001</td><td id="~]n}" class="">페이지 타이틀</td><td id=";lA{" class="">브라우저 탭에 표시되는 제목</td><td id="l|LV" class=""><code>가비아 클라우드 \| 서비스 지표 대시보드 \| Ted(신태선)-클라우드기획팀</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80be-be95-cc838ed5a79f"><td id="bjJw" class="">POL-U002</td><td id="~]n}" class="">페이지 레이아웃</td><td id=";lA{" class="">콘텐츠 영역 채우기</td><td id="l|LV" class=""><code>fillable=True</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80c7-9cdf-da3e8ceeef8f"><td id="bjJw" class="">POL-U003</td><td id="~]n}" class="">사이드바 기본 상태</td><td id=";lA{" class="">디바이스별 기본 열림/닫힘</td><td id="l|LV" class=""><code>open=&quot;desktop&quot;</code> (데스크톱만 열림)</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-800f-9607-c8a0929b5787"><td id="bjJw" class="">POL-U004</td><td id="~]n}" class="">상단 카드 레이아웃</td><td id=";lA{" class="">Value Box 영역</td><td id="l|LV" class=""><code>fill=False</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80e4-bda3-dfe14ee4fd54"><td id="bjJw" class="">POL-U005</td><td id="~]n}" class="">중단 카드 레이아웃</td><td id=";lA{" class="">테이블 + 산점도 2열</td><td id="l|LV" class=""><code>col_widths=[6, 6]</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8010-863f-ee083f3e5e24"><td id="bjJw" class="">POL-U006</td><td id="~]n}" class="">하단 카드 레이아웃</td><td id=";lA{" class="">바이올린 플롯 전체 너비</td><td id="l|LV" class=""><code>col_widths=[12]</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-801c-91dd-d390fecb59c4"><td id="bjJw" class="">POL-U007</td><td id="~]n}" class="">카드 전체화면</td><td id=";lA{" class="">모든 메인 카드에 전체화면 기능</td><td id="l|LV" class=""><code>full_screen=True</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80dc-a4d9-d740fb1c8933"><td id="bjJw" class="">POL-U008</td><td id="~]n}" class="">Popover 위치</td><td id=";lA{" class="">산점도 옵션 팝오버</td><td id="l|LV" class=""><code>placement=&quot;top&quot;</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8083-a683-c2742ff275f1"><td id="bjJw" class="">POL-U009</td><td id="~]n}" class="">라디오 버튼 배치</td><td id=";lA{" class="">옵션 가로 배열</td><td id="l|LV" class=""><code>inline=True</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80ed-a89b-cde830f6d68f"><td id="bjJw" class="">POL-U010</td><td id="~]n}" class="">외부 스타일</td><td id=";lA{" class="">CSS 파일 포함</td><td id="l|LV" class=""><code>styles.css</code></td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-80dc-a1f6-fc4a49700a6c"/></div><div style="display:contents" dir="auto"><h2 id="2e8c434b-f602-803a-bd1c-ce3bc8dd3c31" class="">7. 아이콘 정책</h2></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-806b-939e-f1efcfc0305e" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8048-9bbb-e678f6dd5956"><th id="Lsqh" class="simple-table-header-color simple-table-header">정책 ID</th><th id="G&lt;Xa" class="simple-table-header-color simple-table-header">용도</th><th id="f=ik" class="simple-table-header-color simple-table-header">아이콘</th><th id="Egj]" class="simple-table-header-color simple-table-header">FontAwesome 코드</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80b9-b3c7-ff9b3cddbb93"><td id="Lsqh" class="">POL-I001</td><td id="G&lt;Xa" class="">조회 건수 Value Box</td><td id="f=ik" class="">👤 사용자</td><td id="Egj]" class=""><code>fa.icon_svg(&quot;user&quot;, &quot;regular&quot;)</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-808a-b839-cbeac733a77b"><td id="Lsqh" class="">POL-I002</td><td id="G&lt;Xa" class="">오버리지 비중 Value Box</td><td id="f=ik" class="">💰 지갑</td><td id="Egj]" class=""><code>fa.icon_svg(&quot;wallet&quot;)</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8085-80f2-caa2155882fe"><td id="Lsqh" class="">POL-I003</td><td id="G&lt;Xa" class="">평균 월과금 Value Box</td><td id="f=ik" class="">💵 달러</td><td id="Egj]" class=""><code>fa.icon_svg(&quot;dollar-sign&quot;)</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80be-b57c-f67fc1ac4a55"><td id="Lsqh" class="">POL-I004</td><td id="G&lt;Xa" class="">차트 옵션 Popover</td><td id="f=ik" class="">⋯ 더보기</td><td id="Egj]" class=""><code>fa.icon_svg(&quot;ellipsis&quot;)</code></td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-8059-93c8-ccc9038f5978"/></div><div style="display:contents" dir="auto"><h2 id="2e8c434b-f602-803b-ae8b-dd0add5af705" class="">8. 반응형 동작 정책</h2></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-802a-9aa9-dd3eb8e3e8c5" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8028-bcd6-ecf72d5f2bd1"><th id="v}JY" class="simple-table-header-color simple-table-header">정책 ID</th><th id="AWea" class="simple-table-header-color simple-table-header">트리거</th><th id="@y`A" class="simple-table-header-color simple-table-header">동작</th><th id="T]{k" class="simple-table-header-color simple-table-header">영향 범위</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8019-b1e1-c124c4138c1c"><td id="v}JY" class="">POL-R001</td><td id="AWea" class=""><code>monthly_cost</code> 변경</td><td id="@y`A" class=""><code>tips_data()</code> 재계산</td><td id="T]{k" class="">Value Box 3개 + 차트 3개</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-807a-be33-d15bfb4cbb4e"><td id="v}JY" class="">POL-R002</td><td id="AWea" class=""><code>traffic_window</code> 변경</td><td id="@y`A" class=""><code>tips_data()</code> 재계산</td><td id="T]{k" class="">Value Box 3개 + 차트 3개</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80b7-9033-fc97c19c360a"><td id="v}JY" class="">POL-R003</td><td id="AWea" class=""><code>reset</code> 클릭</td><td id="@y`A" class="">필터 기본값 복원 → <code>tips_data()</code> 재계산</td><td id="T]{k" class="">필터 UI + Value Box 3개 + 차트 3개</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80e4-b6ef-caea3457fb86"><td id="v}JY" class="">POL-R004</td><td id="AWea" class=""><code>scatter_color</code> 변경</td><td id="@y`A" class=""><code>scatterplot()</code> 재실행</td><td id="T]{k" class="">산점도 차트만</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8046-9875-f9d996fa7a4e"><td id="v}JY" class="">POL-R005</td><td id="AWea" class=""><code>ratio_split_by</code> 변경</td><td id="@y`A" class=""><code>overage_ratio_dist()</code> 재실행</td><td id="T]{k" class="">바이올린 플롯만</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-803d-b431-da6e4e443684"/></div><div style="display:contents" dir="auto"><h2 id="2e8c434b-f602-80bf-887a-d91164ae780a" class="">9. 예외 처리 정책</h2></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-8055-9a49-d8ae905fcf3d" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80f6-93f3-d82f31403ccc"><th id="Xo:q" class="simple-table-header-color simple-table-header">정책 ID</th><th id="]JK~" class="simple-table-header-color simple-table-header">예외 상황</th><th id="gXmj" class="simple-table-header-color simple-table-header">처리 방식</th><th id="HF:]" class="simple-table-header-color simple-table-header">사용자 표시</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80a6-af79-c3c85b1380a9"><td id="Xo:q" class="">POL-E001</td><td id="]JK~" class="">필터 결과 0건 - Value Box</td><td id="gXmj" class="">계산 스킵</td><td id="HF:]" class=""><code>&quot;-&quot;</code> 표시</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80b6-94b3-dd026484b478"><td id="Xo:q" class="">POL-E002</td><td id="]JK~" class="">필터 결과 0건 - 차트</td><td id="gXmj" class="">빈 Figure 생성</td><td id="HF:]" class=""><code>&quot;필터 결과가 없습니다.&quot;</code> 중앙 표시</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8018-9d29-d32cc258f23b"><td id="Xo:q" class="">POL-E003</td><td id="]JK~" class="">월 과금 0원 (나누기 오류)</td><td id="gXmj" class=""><code>replace(0, None)</code></td><td id="HF:]" class="">해당 행 비중 계산에서 제외</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8074-85b9-c4801b075ff5"><td id="Xo:q" class="">POL-E004</td><td id="]JK~" class="">오버리지 비중 유효값 없음</td><td id="gXmj" class=""><code>dropna()</code> 후 확인</td><td id="HF:]" class="">바이올린 플롯에 빈 메시지</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-80ab-8648-cfdf755ec7f1"/></div><div style="display:contents" dir="auto"><h2 id="2e8c434b-f602-8091-9328-cbebd0f9795c" class="">10. 트래픽 구간 정의</h2></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-804b-9340-f5baa664be52" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80a9-ac47-cf2f3d3c8ff3"><th id="krKb" class="simple-table-header-color simple-table-header">구간 코드</th><th id="&gt;NrP" class="simple-table-header-color simple-table-header">표시명</th><th id="FACr" class="simple-table-header-color simple-table-header">설명</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80b0-8824-c22d45d43f4b"><td id="krKb" class=""><code>BUSINESS</code></td><td id="&gt;NrP" class="">업무시간</td><td id="FACr" class="">주간 업무 시간대 트래픽</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8080-b672-d24892c3cfc7"><td id="krKb" class=""><code>PEAK</code></td><td id="&gt;NrP" class="">야간/피크</td><td id="FACr" class="">야간 또는 피크 시간대 트래픽</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-8022-8e2d-d66d7c273a00"/></div><div style="display:contents" dir="auto"><h2 id="2e8c434b-f602-80a2-ac55-d9af3a1bbdb6" class="">11. 데이터 필드 정책</h2></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-8059-b33b-e650948e4cc1" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80af-bcb3-cbbd364e4e3b"><th id="dlI^" class="simple-table-header-color simple-table-header">필드명</th><th id="?HIx" class="simple-table-header-color simple-table-header">타입</th><th id="bSFP" class="simple-table-header-color simple-table-header">용도</th><th id="OcX{" class="simple-table-header-color simple-table-header">허용값</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-805f-a800-d7fddb13fdf2"><td id="dlI^" class=""><code>monthly_cost_krw</code></td><td id="?HIx" class="">Integer</td><td id="bSFP" class="">월 과금</td><td id="OcX{" class="">0 이상 정수</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8011-8f3f-c5255ba850b0"><td id="dlI^" class=""><code>overage_cost_krw</code></td><td id="?HIx" class="">Integer</td><td id="bSFP" class="">오버리지 비용</td><td id="OcX{" class="">0 이상 정수</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-805b-b18e-c717c7d01b8c"><td id="dlI^" class=""><code>traffic_window</code></td><td id="?HIx" class="">String</td><td id="bSFP" class="">트래픽 구간</td><td id="OcX{" class=""><code>BUSINESS</code>, <code>PEAK</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8006-b432-c39931764416"><td id="dlI^" class=""><code>customer_segment</code></td><td id="?HIx" class="">String</td><td id="bSFP" class="">고객 세그먼트</td><td id="OcX{" class="">자유 문자열</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8082-a76b-cfb439528c2c"><td id="dlI^" class=""><code>promo_applied</code></td><td id="?HIx" class="">Boolean</td><td id="bSFP" class="">프로모션 적용</td><td id="OcX{" class=""><code>True</code>, <code>False</code></td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8083-af32-c245c2ddcd97"><td id="dlI^" class=""><code>weekday</code></td><td id="?HIx" class="">String</td><td id="bSFP" class="">요일</td><td id="OcX{" class=""><code>Mon</code>~<code>Sun</code></td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-80f7-8ea3-ca7228f0f4b5"/></div><div style="display:contents" dir="auto"><h2 id="2e8c434b-f602-80bb-99e4-dd7ada665bdc" class="">12. 정책 우선순위</h2></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-808f-9496-c8933216b234" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8037-8115-ee0533b64ed0"><th id="CteS" class="simple-table-header-color simple-table-header">우선순위</th><th id="FLEW" class="simple-table-header-color simple-table-header">정책 분류</th><th id="rRPt" class="simple-table-header-color simple-table-header">설명</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80ef-84ab-dadf282a739e"><td id="CteS" class="">1 (최상)</td><td id="FLEW" class="">예외 처리 정책</td><td id="rRPt" class="">오류 방지 및 안정성 확보</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8074-97cf-e85c8b506c3e"><td id="CteS" class="">2</td><td id="FLEW" class="">데이터 계산 정책</td><td id="rRPt" class="">정확한 지표 산출</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-801d-a01a-cb0c64f8e850"><td id="CteS" class="">3</td><td id="FLEW" class="">필터링 정책</td><td id="rRPt" class="">사용자 의도 반영</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80e2-82a1-d223de29ddd3"><td id="CteS" class="">4</td><td id="FLEW" class="">표시 형식 정책</td><td id="rRPt" class="">가독성 확보</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8063-a4eb-f4afa1087784"><td id="CteS" class="">5</td><td id="FLEW" class="">UI/UX 정책</td><td id="rRPt" class="">사용 편의성</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-80f5-b263-e0ca9a495218"/></div><div style="display:contents" dir="auto"><h2 id="2e8c434b-f602-8036-946d-eece4cc8ef66" class="">13. 변경 이력</h2></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-80ce-9b35-d41bbcd17480" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8053-9d42-f6e1e16c7430"><th id=":CtR" class="simple-table-header-color simple-table-header">버전</th><th id="Ujjl" class="simple-table-header-color simple-table-header">일자</th><th id="[fWB" class="simple-table-header-color simple-table-header">작성자</th><th id="=oeE" class="simple-table-header-color simple-table-header">변경 내용</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80c4-8f57-cf5a4a192fa1"><td id=":CtR" class="">v1.0</td><td id="Ujjl" class="">2026-01-14</td><td id="[fWB" class="">Ted(신태선)</td><td id="=oeE" class="">최초 작성</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-80b1-8afd-ed5a8eac9936"/></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

@@ -1,0 +1,713 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>요구사항 정의서 (PRD)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2e8c434b-f602-8054-88b1-dc655be7c70c" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">📋</span></div><h1 class="page-title" dir="auto">요구사항 정의서 (PRD)</h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="ltr"><figure id="2e8c434b-f602-8029-8408-c23131dea099"><div class="source"><a href="%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD_%EC%A0%95%EC%9D%98%EC%84%9C_(PRD).md">요구사항 정의서 (PRD).md</a></div></figure></div><div style="display:contents" dir="auto"><h2 id="2e8c434b-f602-80ca-bec6-dbd866831037" class="">1. 문서 개요</h2></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-8086-99e2-c6b8a2b1ee6b" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80b2-bc0e-c8608b089630"><th id="d@=o" class="simple-table-header-color simple-table-header">항목</th><th id="rRQP" class="simple-table-header-color simple-table-header">내용</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80e3-974d-d3f86e8de3bd"><td id="d@=o" class=""><strong>프로젝트명</strong></td><td id="rRQP" class="">가비아 클라우드 서비스 지표 대시보드</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-802c-9341-eadc2e9f2f97"><td id="d@=o" class=""><strong>작성자</strong></td><td id="rRQP" class="">Ted(신태선) - 클라우드기획팀</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8010-a8af-f378bf96f1c5"><td id="d@=o" class=""><strong>작성일</strong></td><td id="rRQP" class="">2026-01-14</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-808c-83dd-eaccf3d54963"><td id="d@=o" class=""><strong>버전</strong></td><td id="rRQP" class="">v1.0</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-803e-8184-c68e23808b68"><td id="d@=o" class=""><strong>기술 스택</strong></td><td id="rRQP" class="">Python Shiny (Express), Matplotlib, Seaborn</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-80fc-9af6-d64e690946e8"/></div><div style="display:contents" dir="auto"><h2 id="2e8c434b-f602-801a-9570-d3d255e8f64b" class="">2. 기능 요구사항 (Functional Requirements)</h2></div><div style="display:contents" dir="auto"><h3 id="2e8c434b-f602-80e5-a93a-cb9bb379f5b7" class="">2.1 필터 기능</h3></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-802d-8291-c61850193885" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-809a-97d7-ce4833f5b472"><th id="zcue" class="simple-table-header-color simple-table-header">ID</th><th id="ozN|" class="simple-table-header-color simple-table-header">요구사항명</th><th id="T{^@" class="simple-table-header-color simple-table-header">상세 설명</th><th id="AfPU" class="simple-table-header-color simple-table-header">입력</th><th id="~&gt;U&lt;" class="simple-table-header-color simple-table-header">출력</th><th id="It=w" class="simple-table-header-color simple-table-header">우선순위</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8098-96c4-d2dc8c982908"><td id="zcue" class="">FR-001</td><td id="ozN|" class="">월 과금 범위 필터</td><td id="T{^@" class="">사용자가 범위 슬라이더를 조작하여 월 과금(monthly_cost_krw) 범위를 지정할 수 있다</td><td id="AfPU" class="">슬라이더 min/max 값</td><td id="~&gt;U&lt;" class="">범위 내 데이터만 필터링</td><td id="It=w" class="">상</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8042-9554-f535bed9d0ab"><td id="zcue" class="">FR-002</td><td id="ozN|" class="">트래픽 구간 필터</td><td id="T{^@" class="">업무시간(BUSINESS), 야간/피크(PEAK) 중 원하는 구간을 체크박스로 선택할 수 있다</td><td id="AfPU" class="">체크박스 선택값</td><td id="~&gt;U&lt;" class="">선택된 구간 데이터만 필터링</td><td id="It=w" class="">상</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-804e-8195-e7e867705791"><td id="zcue" class="">FR-003</td><td id="ozN|" class="">필터 초기화</td><td id="T{^@" class="">&quot;필터 초기화&quot; 버튼 클릭 시 모든 필터가 기본값으로 복원된다</td><td id="AfPU" class="">버튼 클릭</td><td id="~&gt;U&lt;" class="">슬라이더: 전체범위, 체크박스: 모두선택</td><td id="It=w" class="">중</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-8005-9cc2-cf9bfb55c2f0"/></div><div style="display:contents" dir="auto"><h3 id="2e8c434b-f602-8035-af3b-f5e8dff5e547" class="">2.2 지표 표시 기능</h3></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-804a-82af-d2b276a6f9ff" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80e3-821d-c649c1bb0520"><th id="G&lt;Tk" class="simple-table-header-color simple-table-header">ID</th><th id="&lt;dz=" class="simple-table-header-color simple-table-header">요구사항명</th><th id="qRG]" class="simple-table-header-color simple-table-header">상세 설명</th><th id="xq`s" class="simple-table-header-color simple-table-header">계산 로직</th><th id="CDEO" class="simple-table-header-color simple-table-header">표시 형식</th><th id="r|l;" class="simple-table-header-color simple-table-header">우선순위</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80bd-86b0-ca280baf3330"><td id="G&lt;Tk" class="">FR-004</td><td id="&lt;dz=" class="">조회 대상 건수</td><td id="qRG]" class="">필터 조건에 부합하는 데이터 건수를 Value Box에 표시한다</td><td id="xq`s" class=""><code>len(filtered_data)</code></td><td id="CDEO" class="">정수 (예: 1,234)</td><td id="r|l;" class="">상</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8038-a053-e9830927671d"><td id="G&lt;Tk" class="">FR-005</td><td id="&lt;dz=" class="">평균 오버리지 비중</td><td id="qRG]" class="">필터링된 데이터의 평균 오버리지 비중을 표시한다</td><td id="xq`s" class=""><code>mean(overage_cost / monthly_cost)</code></td><td id="CDEO" class="">백분율 소수점 1자리 (예: 12.5%)</td><td id="r|l;" class="">상</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8080-89e2-e1866859a532"><td id="G&lt;Tk" class="">FR-006</td><td id="&lt;dz=" class="">평균 월 과금</td><td id="qRG]" class="">필터링된 데이터의 평균 월 과금을 표시한다</td><td id="xq`s" class=""><code>mean(monthly_cost_krw)</code></td><td id="CDEO" class="">원화 천단위 콤마 (예: ₩1,234,567)</td><td id="r|l;" class="">상</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-803e-b3f5-c2c7ef6d9089"/></div><div style="display:contents" dir="auto"><h3 id="2e8c434b-f602-80e7-9a14-ed9153fd8ecb" class="">2.3 데이터 시각화 기능</h3></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-80c8-9bd7-fec0483abb08" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8054-bb21-cfecff27ce4e"><th id=";zxO" class="simple-table-header-color simple-table-header">ID</th><th id="PD\w" class="simple-table-header-color simple-table-header">요구사항명</th><th id="{xEZ" class="simple-table-header-color simple-table-header">상세 설명</th><th id="tvOW" class="simple-table-header-color simple-table-header">차트 유형</th><th id="qnsr" class="simple-table-header-color simple-table-header">옵션</th><th id="H:bZ" class="simple-table-header-color simple-table-header">우선순위</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8077-99e7-f65890f2be6e"><td id=";zxO" class="">FR-007</td><td id="PD\w" class="">원천 데이터 미리보기</td><td id="{xEZ" class="">필터링된 데이터를 그리드 테이블 형태로 제공한다</td><td id="tvOW" class="">DataGrid</td><td id="qnsr" class="">최대 200행 표시</td><td id="H:bZ" class="">중</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8027-ae45-e9653605054e"><td id=";zxO" class="">FR-008</td><td id="PD\w" class="">월과금 vs 오버리지 산점도</td><td id="{xEZ" class="">두 변수 간 상관관계를 산점도로 시각화한다</td><td id="tvOW" class="">Scatter Plot</td><td id="qnsr" class="">색상 기준 선택 가능</td><td id="H:bZ" class="">상</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80a4-9815-e1171e89cdc0"><td id=";zxO" class="">FR-009</td><td id="PD\w" class="">산점도 색상 옵션</td><td id="{xEZ" class="">산점도의 점 색상을 그룹별로 구분할 수 있다</td><td id="tvOW" class="">-</td><td id="qnsr" class="">없음/세그먼트/프로모션/요일/트래픽</td><td id="H:bZ" class="">중</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80ba-bc17-dad483e72737"><td id=";zxO" class="">FR-010</td><td id="PD\w" class="">오버리지 비중 분포</td><td id="{xEZ" class="">오버리지 비중의 분포를 그룹별로 시각화한다</td><td id="tvOW" class="">Violin Plot</td><td id="qnsr" class="">그룹 기준 선택 가능</td><td id="H:bZ" class="">상</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8064-a707-cccc557322fa"><td id=";zxO" class="">FR-011</td><td id="PD\w" class="">분포 차트 그룹 옵션</td><td id="{xEZ" class="">바이올린 플롯의 그룹 기준을 변경할 수 있다</td><td id="tvOW" class="">-</td><td id="qnsr" class="">세그먼트/프로모션/요일/트래픽</td><td id="H:bZ" class="">중</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-80e4-ab76-f97279c4ba77"/></div><div style="display:contents" dir="auto"><h3 id="2e8c434b-f602-80cc-b134-f75ca8bb7151" class="">2.4 실시간 반응 기능</h3></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-8097-887b-f3f554045e73" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80ac-98a5-d89e8d41aaf1"><th id="]t[E" class="simple-table-header-color simple-table-header">ID</th><th id="ZM^o" class="simple-table-header-color simple-table-header">요구사항명</th><th id="p^Pn" class="simple-table-header-color simple-table-header">상세 설명</th><th id="_gzq" class="simple-table-header-color simple-table-header">트리거</th><th id="~KnV" class="simple-table-header-color simple-table-header">영향 범위</th><th id="@WJX" class="simple-table-header-color simple-table-header">우선순위</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8006-8adf-c28f3b657943"><td id="]t[E" class="">FR-012</td><td id="ZM^o" class="">실시간 데이터 갱신</td><td id="p^Pn" class="">필터 변경 시 모든 컴포넌트가 실시간으로 갱신된다</td><td id="_gzq" class="">필터 값 변경</td><td id="~KnV" class="">Value Box 3개 + 차트 3개</td><td id="@WJX" class="">상</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8001-9d1b-c38271332295"><td id="]t[E" class="">FR-013</td><td id="ZM^o" class="">차트 옵션 반응</td><td id="p^Pn" class="">차트 옵션 변경 시 해당 차트만 즉시 리렌더링된다</td><td id="_gzq" class="">라디오버튼 선택</td><td id="~KnV" class="">해당 차트</td><td id="@WJX" class="">중</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-8031-a075-d1d0eeb65eb3"/></div><div style="display:contents" dir="auto"><h2 id="2e8c434b-f602-808f-97f2-e51d1ac055d8" class="">3. 비기능 요구사항 (Non-Functional Requirements)</h2></div><div style="display:contents" dir="auto"><h3 id="2e8c434b-f602-8080-aaaf-de094073cdd4" class="">3.1 성능</h3></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-80b4-9c86-d8b10db87696" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80e7-8c96-d010286ec3f3"><th id="KPFM" class="simple-table-header-color simple-table-header">ID</th><th id="fkDB" class="simple-table-header-color simple-table-header">요구사항명</th><th id="dE&lt;:" class="simple-table-header-color simple-table-header">상세 설명</th><th id="x\&lt;G" class="simple-table-header-color simple-table-header">기준값</th><th id="[Ub;" class="simple-table-header-color simple-table-header">우선순위</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80ed-a37a-cdd06284b1cc"><td id="KPFM" class="">NFR-001</td><td id="fkDB" class="">초기 로딩 속도</td><td id="dE&lt;:" class="">대시보드 첫 로딩 완료 시간</td><td id="x\&lt;G" class="">3초 이내</td><td id="[Ub;" class="">상</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80c2-9200-e9007895fca6"><td id="KPFM" class="">NFR-002</td><td id="fkDB" class="">필터 반응 속도</td><td id="dE&lt;:" class="">필터 변경 후 차트 갱신 완료 시간</td><td id="x\&lt;G" class="">2초 이내</td><td id="[Ub;" class="">상</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8001-b5c2-cf8c22b2ef3a"><td id="KPFM" class="">NFR-003</td><td id="fkDB" class="">차트 렌더링</td><td id="dE&lt;:" class="">개별 차트 렌더링 완료 시간</td><td id="x\&lt;G" class="">1초 이내</td><td id="[Ub;" class="">중</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-80db-9c9a-c0f4979ba298"/></div><div style="display:contents" dir="auto"><h3 id="2e8c434b-f602-80ec-b439-edde94944193" class="">3.2 사용성 (UI/UX)</h3></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-80ad-b0e7-eb8a2c240c8c" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80c7-8ade-c338db9215d9"><th id="={Ds" class="simple-table-header-color simple-table-header">ID</th><th id="aTxG" class="simple-table-header-color simple-table-header">요구사항명</th><th id="xlF\" class="simple-table-header-color simple-table-header">상세 설명</th><th id="Mf}y" class="simple-table-header-color simple-table-header">기준</th><th id="XyL?" class="simple-table-header-color simple-table-header">우선순위</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8028-9c5d-d6e7d6ca9655"><td id="={Ds" class="">NFR-004</td><td id="aTxG" class="">반응형 사이드바</td><td id="xlF\" class="">데스크톱에서 사이드바 기본 열림, 모바일에서 기본 닫힘</td><td id="Mf}y" class=""><code>open=&quot;desktop&quot;</code></td><td id="XyL?" class="">중</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80e1-b3b6-e1dd3525c421"><td id="={Ds" class="">NFR-005</td><td id="aTxG" class="">전체화면 지원</td><td id="xlF\" class="">각 카드(차트)는 전체화면으로 확대 가능해야 함</td><td id="Mf}y" class=""><code>full_screen=True</code></td><td id="XyL?" class="">하</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80ac-8249-ec65fd3f9e83"><td id="={Ds" class="">NFR-006</td><td id="aTxG" class="">직관적 아이콘</td><td id="xlF\" class="">Value Box에 의미를 나타내는 아이콘 표시</td><td id="Mf}y" class="">FontAwesome 아이콘</td><td id="XyL?" class="">하</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-80da-8ce3-c01d625b43f7"/></div><div style="display:contents" dir="auto"><h3 id="2e8c434b-f602-80d3-8e9c-e2d71cc97d05" class="">3.3 예외 처리</h3></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-8041-b0ba-c3f9f150864c" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80b5-b983-e570868e2c61"><th id="rb\p" class="simple-table-header-color simple-table-header">ID</th><th id="Ohou" class="simple-table-header-color simple-table-header">요구사항명</th><th id="lT]W" class="simple-table-header-color simple-table-header">상세 설명</th><th id="{MCt" class="simple-table-header-color simple-table-header">처리 방식</th><th id="YfO@" class="simple-table-header-color simple-table-header">우선순위</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8062-8f40-f5db9c91bed1"><td id="rb\p" class="">NFR-007</td><td id="Ohou" class="">빈 데이터 처리 - 지표</td><td id="lT]W" class="">필터 결과가 0건일 때 Value Box 표시</td><td id="{MCt" class="">&quot;-&quot; 문자 표시</td><td id="YfO@" class="">상</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-808c-89bb-e04576d6e3f1"><td id="rb\p" class="">NFR-008</td><td id="Ohou" class="">빈 데이터 처리 - 차트</td><td id="lT]W" class="">필터 결과가 0건일 때 차트 표시</td><td id="{MCt" class="">&quot;필터 결과가 없습니다.&quot; 메시지</td><td id="YfO@" class="">상</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80f7-847e-d432687c6456"><td id="rb\p" class="">NFR-009</td><td id="Ohou" class="">0으로 나누기 방지</td><td id="lT]W" class="">monthly_cost_krw가 0일 때 오버리지 비중 계산</td><td id="{MCt" class="">NULL 처리 후 평균 계산에서 제외</td><td id="YfO@" class="">상</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-80aa-862a-e2421e9b442c"/></div><div style="display:contents" dir="auto"><h2 id="2e8c434b-f602-8055-a28e-ca5c5db20694" class="">4. 데이터 요구사항</h2></div><div style="display:contents" dir="auto"><h3 id="2e8c434b-f602-8018-baae-c398f03c38a1" class="">4.1 입력 데이터 스키마 (tips 데이터셋)</h3></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-80cc-935d-d645a3636516" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80f1-af57-f42b281b5b9a"><th id="O&lt;_d" class="simple-table-header-color simple-table-header">필드명</th><th id=";TKx" class="simple-table-header-color simple-table-header">데이터 타입</th><th id="Bbon" class="simple-table-header-color simple-table-header">설명</th><th id="&gt;SOR" class="simple-table-header-color simple-table-header">필수</th><th id="~|TE" class="simple-table-header-color simple-table-header">예시</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8006-89bb-cfcc0641a9a3"><td id="O&lt;_d" class=""><code>monthly_cost_krw</code></td><td id=";TKx" class="">Integer</td><td id="Bbon" class="">월 과금 금액 (원)</td><td id="&gt;SOR" class="">Y</td><td id="~|TE" class="">150000</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8099-b50f-e43d23c0274f"><td id="O&lt;_d" class=""><code>overage_cost_krw</code></td><td id=";TKx" class="">Integer</td><td id="Bbon" class="">오버리지 비용 (원)</td><td id="&gt;SOR" class="">Y</td><td id="~|TE" class="">25000</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8063-a5c2-ca5dc337d831"><td id="O&lt;_d" class=""><code>traffic_window</code></td><td id=";TKx" class="">String</td><td id="Bbon" class="">트래픽 구간</td><td id="&gt;SOR" class="">Y</td><td id="~|TE" class="">&quot;BUSINESS&quot; 또는 &quot;PEAK&quot;</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8024-9f4b-e983acfa42a4"><td id="O&lt;_d" class=""><code>customer_segment</code></td><td id=";TKx" class="">String</td><td id="Bbon" class="">고객 세그먼트</td><td id="&gt;SOR" class="">Y</td><td id="~|TE" class="">&quot;Enterprise&quot;</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8037-a8cc-f908dcce65e3"><td id="O&lt;_d" class=""><code>promo_applied</code></td><td id=";TKx" class="">Boolean/String</td><td id="Bbon" class="">프로모션 적용 여부</td><td id="&gt;SOR" class="">Y</td><td id="~|TE" class="">True / False</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-805e-b7e7-c61a0dcc86ef"><td id="O&lt;_d" class=""><code>weekday</code></td><td id=";TKx" class="">String</td><td id="Bbon" class="">요일</td><td id="&gt;SOR" class="">Y</td><td id="~|TE" class="">&quot;Mon&quot;, &quot;Tue&quot;, ...</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-8009-9a2e-ff04f1d518f7"/></div><div style="display:contents" dir="auto"><h3 id="2e8c434b-f602-8046-a7a1-cd62d3844eb8" class="">4.2 계산 필드</h3></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-80c2-9bc8-dd5da21234ef" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80bb-9ba5-f073ffaa9572"><th id=":eIB" class="simple-table-header-color simple-table-header">필드명</th><th id="C]Z=" class="simple-table-header-color simple-table-header">계산 공식</th><th id="zPFh" class="simple-table-header-color simple-table-header">설명</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-809a-a8ec-ff6ef729ca50"><td id=":eIB" class=""><code>overage_ratio</code></td><td id="C]Z=" class=""><code>overage_cost_krw / monthly_cost_krw</code></td><td id="zPFh" class="">월 과금 대비 오버리지 비중</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-80bc-9d98-ca5a51ee8597"/></div><div style="display:contents" dir="auto"><h2 id="2e8c434b-f602-8018-ad0c-d924ee70b89d" class="">5. 인터페이스 요구사항</h2></div><div style="display:contents" dir="auto"><h3 id="2e8c434b-f602-8006-824b-c279fd12fa0c" class="">5.1 입력 인터페이스</h3></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-80de-b603-f773fef313da" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8086-b792-cef533550614"><th id="TUCu" class="simple-table-header-color simple-table-header">컴포넌트</th><th id="mI:o" class="simple-table-header-color simple-table-header">유형</th><th id="|K~}" class="simple-table-header-color simple-table-header">ID</th><th id="[@Se" class="simple-table-header-color simple-table-header">기본값</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80aa-8b24-dd3046fe6882"><td id="TUCu" class="">월 과금 범위</td><td id="mI:o" class="">Range Slider</td><td id="|K~}" class=""><code>monthly_cost</code></td><td id="[@Se" class="">데이터 전체 범위 (min~max)</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8041-a779-f81610e69cb5"><td id="TUCu" class="">트래픽 구간</td><td id="mI:o" class="">Checkbox Group</td><td id="|K~}" class=""><code>traffic_window</code></td><td id="[@Se" class="">[&quot;BUSINESS&quot;, &quot;PEAK&quot;] 모두 선택</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-801a-bf76-c78d097b29a5"><td id="TUCu" class="">필터 초기화</td><td id="mI:o" class="">Action Button</td><td id="|K~}" class=""><code>reset</code></td><td id="[@Se" class="">-</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8067-bf6c-ec0cf9f98e67"><td id="TUCu" class="">산점도 색상 기준</td><td id="mI:o" class="">Radio Buttons</td><td id="|K~}" class=""><code>scatter_color</code></td><td id="[@Se" class="">&quot;none&quot;</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8016-9f62-d6e1f958fb17"><td id="TUCu" class="">분포 그룹 기준</td><td id="mI:o" class="">Radio Buttons</td><td id="|K~}" class=""><code>ratio_split_by</code></td><td id="[@Se" class="">&quot;weekday&quot;</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-80b7-a50c-cd38cd39e716"/></div><div style="display:contents" dir="auto"><h3 id="2e8c434b-f602-8016-acc0-fb0850a8f04e" class="">5.2 출력 인터페이스</h3></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-80c7-8144-dcf3b005ace1" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8060-b284-c9e1db751442"><th id="srYH" class="simple-table-header-color simple-table-header">컴포넌트</th><th id="&lt;\]X" class="simple-table-header-color simple-table-header">유형</th><th id="tnPU" class="simple-table-header-color simple-table-header">위치</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80b6-9fc4-f2ea5f512375"><td id="srYH" class="">조회 대상 건수</td><td id="&lt;\]X" class="">Value Box</td><td id="tnPU" class="">상단 좌측</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8075-9393-ef85a7f7e00b"><td id="srYH" class="">평균 오버리지 비중</td><td id="&lt;\]X" class="">Value Box</td><td id="tnPU" class="">상단 중앙</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8087-aee9-f1a556177a11"><td id="srYH" class="">평균 월 과금</td><td id="&lt;\]X" class="">Value Box</td><td id="tnPU" class="">상단 우측</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8000-a09a-ff8bfbd47ea1"><td id="srYH" class="">데이터 테이블</td><td id="&lt;\]X" class="">DataGrid</td><td id="tnPU" class="">중단 좌측 (col-6)</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8075-a8cc-dbff12e6e27b"><td id="srYH" class="">산점도 차트</td><td id="&lt;\]X" class="">Scatter Plot</td><td id="tnPU" class="">중단 우측 (col-6)</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8066-8e0b-e2a26ec49528"><td id="srYH" class="">바이올린 플롯</td><td id="&lt;\]X" class="">Violin Plot</td><td id="tnPU" class="">하단 전체 (col-12)</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-80db-8308-de5f5048c801"/></div><div style="display:contents" dir="auto"><h2 id="2e8c434b-f602-80b8-9fcc-e344a8c26624" class="">6. 제약사항 및 가정</h2></div><div style="display:contents" dir="auto"><h3 id="2e8c434b-f602-8059-8306-f69d895dbc1b" class="">6.1 제약사항</h3></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-80dd-8a2b-d9379db714a8" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8088-ae4c-c844e611bfd0"><th id="VxD~" class="simple-table-header-color simple-table-header">ID</th><th id="S:zK" class="simple-table-header-color simple-table-header">구분</th><th id="eXZn" class="simple-table-header-color simple-table-header">내용</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8073-8392-fcbb559bd760"><td id="VxD~" class="">CON-001</td><td id="S:zK" class="">데이터</td><td id="eXZn" class="">tips 데이터셋은 사전에 <code>shared.py</code>에서 로드되어 있어야 함</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-804e-aa34-f62b72f3a714"><td id="VxD~" class="">CON-002</td><td id="S:zK" class="">데이터</td><td id="eXZn" class="">데이터 테이블은 최대 200행까지만 미리보기 제공</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80b1-8a0a-e6141c5b4177"><td id="VxD~" class="">CON-003</td><td id="S:zK" class="">환경</td><td id="eXZn" class="">Python Shiny Express 모드로 실행</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-808b-b471-d8f2fb1ef508"><td id="VxD~" class="">CON-004</td><td id="S:zK" class="">스타일</td><td id="eXZn" class=""><code>styles.css</code> 파일이 <code>app_dir</code> 경로에 존재해야 함</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-80c9-bf1d-df903a75c0ab"/></div><div style="display:contents" dir="auto"><h3 id="2e8c434b-f602-800f-a4f9-f7c771a5471c" class="">6.2 가정사항</h3></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-805b-b13f-cda2095f9838" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-804e-b352-ea497e0dd4d2"><th id="Pf\n" class="simple-table-header-color simple-table-header">ID</th><th id="RI^j" class="simple-table-header-color simple-table-header">내용</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8005-b649-ec187ff97154"><td id="Pf\n" class="">ASM-001</td><td id="RI^j" class="">모든 데이터는 정제된 상태로 제공된다고 가정</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8059-a980-c426a4752f85"><td id="Pf\n" class="">ASM-002</td><td id="RI^j" class="">monthly_cost_krw는 대부분 양수 값을 가진다고 가정</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-809c-8958-e705d158b3d4"><td id="Pf\n" class="">ASM-003</td><td id="RI^j" class="">사용자는 데스크톱 환경에서 주로 사용한다고 가정</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80c2-9fc0-f4ab241da12b"><td id="Pf\n" class="">ASM-004</td><td id="RI^j" class="">동시 접속 사용자 수는 제한적이라고 가정 (샘플 대시보드)</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-80d1-affb-fe287c37e254"/></div><div style="display:contents" dir="auto"><h2 id="2e8c434b-f602-801d-b6ca-dc43248bb635" class="">7. 요구사항 추적 매트릭스 (RTM)</h2></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-80eb-bd87-ea2845f8a9d8" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-809d-8f3b-ed0bffd88c5b"><th id="TbfL" class="simple-table-header-color simple-table-header">요구사항 ID</th><th id="Y?f_" class="simple-table-header-color simple-table-header">구현 함수/컴포넌트</th><th id="zncg" class="simple-table-header-color simple-table-header">코드 라인</th><th id="RW&gt;d" class="simple-table-header-color simple-table-header">검증 방법</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-803f-bfc3-c8ff069a658a"><td id="TbfL" class="">FR-001</td><td id="Y?f_" class=""><code>ui.input_slider(&quot;monthly_cost&quot;, ...)</code></td><td id="zncg" class="">Line 18-24</td><td id="RW&gt;d" class="">슬라이더 조작 후 데이터 변경 확인</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8007-af21-e2107f0018ac"><td id="TbfL" class="">FR-002</td><td id="Y?f_" class=""><code>ui.input_checkbox_group(&quot;traffic_window&quot;, ...)</code></td><td id="zncg" class="">Line 26-31</td><td id="RW&gt;d" class="">체크박스 토글 후 데이터 변경 확인</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80ba-b6ac-c1a45dbe3a68"><td id="TbfL" class="">FR-003</td><td id="Y?f_" class=""><code>@reactive.event(input.reset)</code></td><td id="zncg" class="">Line 149-152</td><td id="RW&gt;d" class="">버튼 클릭 후 필터 초기화 확인</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80eb-a250-f51cb4657e3f"><td id="TbfL" class="">FR-004</td><td id="Y?f_" class=""><code>def total_rows()</code></td><td id="zncg" class="">Line 56-58</td><td id="RW&gt;d" class="">건수 표시 정확성 확인</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8017-9338-fae2f72a2b0e"><td id="TbfL" class="">FR-005</td><td id="Y?f_" class=""><code>def avg_overage_ratio()</code></td><td id="zncg" class="">Line 62-67</td><td id="RW&gt;d" class="">비중 계산 정확성 확인</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-808f-bca0-daafcb316569"><td id="TbfL" class="">FR-006</td><td id="Y?f_" class=""><code>def avg_monthly_cost()</code></td><td id="zncg" class="">Line 71-76</td><td id="RW&gt;d" class="">금액 계산 정확성 확인</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80f2-990d-e838f24514ff"><td id="TbfL" class="">FR-007</td><td id="Y?f_" class=""><code>def table()</code></td><td id="zncg" class="">Line 84-85</td><td id="RW&gt;d" class="">테이블 렌더링 확인</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80bc-9ee5-ca59387cc725"><td id="TbfL" class="">FR-008</td><td id="Y?f_" class=""><code>def scatterplot()</code></td><td id="zncg" class="">Line 97-122</td><td id="RW&gt;d" class="">산점도 렌더링 확인</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8027-a20f-eafc0a9afe4b"><td id="TbfL" class="">FR-010</td><td id="Y?f_" class=""><code>def overage_ratio_dist()</code></td><td id="zncg" class="">Line 136-147</td><td id="RW&gt;d" class="">바이올린 플롯 렌더링 확인</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-806f-a44a-f66f14872dc8"><td id="TbfL" class="">FR-012</td><td id="Y?f_" class=""><code>@reactive.calc def tips_data()</code></td><td id="zncg" class="">Line 43-50</td><td id="RW&gt;d" class="">필터 변경 시 반응 확인</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-8040-87fc-c4423721ca32"/></div><div style="display:contents" dir="auto"><h2 id="2e8c434b-f602-8073-887a-d491d381877d" class="">8. 용어 정의</h2></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-80c9-b5a3-f5424370aa93" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8055-895b-ee1bad39882f"><th id="~yT^" class="simple-table-header-color simple-table-header">용어</th><th id="}eoZ" class="simple-table-header-color simple-table-header">정의</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-808c-90a4-e2da2c6c90cb"><td id="~yT^" class=""><strong>월 과금 (monthly_cost_krw)</strong></td><td id="}eoZ" class="">고객이 한 달간 사용한 클라우드 서비스의 총 청구 금액 (원)</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8060-a31d-d93638d48328"><td id="~yT^" class=""><strong>오버리지 (overage_cost_krw)</strong></td><td id="}eoZ" class="">기본 요금제 초과 사용에 따른 추가 과금 금액 (원)</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8040-895d-ee92da88f9d2"><td id="~yT^" class=""><strong>오버리지 비중 (overage_ratio)</strong></td><td id="}eoZ" class="">월 과금 대비 오버리지 비용의 비율</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80a2-9119-d586892490f6"><td id="~yT^" class=""><strong>트래픽 구간</strong></td><td id="}eoZ" class="">서비스 사용 시간대 구분 (BUSINESS: 업무시간, PEAK: 야간/피크)</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8009-8d17-ca585c5a1b2e"><td id="~yT^" class=""><strong>고객 세그먼트</strong></td><td id="}eoZ" class="">고객 유형 분류 (예: Enterprise, SMB 등)</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80c2-a309-e8222e9fce26"><td id="~yT^" class=""><strong>Value Box</strong></td><td id="}eoZ" class="">핵심 KPI를 시각적으로 강조하여 표시하는 UI 컴포넌트</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-8061-abaa-cba0244c9d09"/></div><div style="display:contents" dir="auto"><h2 id="2e8c434b-f602-8071-83ec-effa4d8d4134" class="">9. 변경 이력</h2></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-805e-83f9-d30c998f67be" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-800c-87c2-e5f1dee4aed8"><th id="Ez{k" class="simple-table-header-color simple-table-header">버전</th><th id="@[lT" class="simple-table-header-color simple-table-header">일자</th><th id="LmMv" class="simple-table-header-color simple-table-header">작성자</th><th id="RVre" class="simple-table-header-color simple-table-header">변경 내용</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-809b-a482-ef17eda78181"><td id="Ez{k" class="">v1.0</td><td id="@[lT" class="">2026-01-14</td><td id="LmMv" class="">Ted(신태선)</td><td id="RVre" class="">최초 작성</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-80b9-aaf7-d6c4f5ce7819"/></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

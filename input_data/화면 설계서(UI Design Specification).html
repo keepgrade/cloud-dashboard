@@ -1,0 +1,716 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>화면 설계서(UI Design Specification)</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+/* Override strong tags inside headings to maintain consistent weight */
+h1 strong,
+h2 strong,
+h3 strong {
+	font-weight: 600;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 10px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.collection-content td {
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+	margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.callout img.notion-static-icon {
+	width: 1em;
+	height: 1em;
+}
+
+.callout p {
+	margin: 0;
+}
+
+.callout h1,
+.callout h2,
+.callout h3 {
+	margin: 0 0 0.6rem;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+blockquote.quote-large {
+	font-size: 1.25em;
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI Variable Display", "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.highlight-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.highlight-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.highlight-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.highlight-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.highlight-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.highlight-default_background {
+	color: rgba(44, 44, 43, 1);
+}
+.highlight-gray_background {
+	background: rgba(42, 28, 0, 0.07);
+}
+.highlight-brown_background {
+	background: rgba(139, 46, 0, 0.086);
+}
+.highlight-orange_background {
+	background: rgba(224, 101, 1, 0.129);
+}
+.highlight-yellow_background {
+	background: rgba(211, 168, 0, 0.137);
+}
+.highlight-teal_background {
+	background: rgba(0, 100, 45, 0.09);
+}
+.highlight-blue_background {
+	background: rgba(0, 124, 215, 0.094);
+}
+.highlight-purple_background {
+	background: rgba(102, 0, 178, 0.078);
+}
+.highlight-pink_background {
+	background: rgba(197, 0, 93, 0.086);
+}
+.highlight-red_background {
+	background: rgba(223, 22, 0, 0.094);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(125, 122, 117, 1);
+	fill: rgba(125, 122, 117, 1);
+}
+.block-color-brown {
+	color: rgba(159, 118, 90, 1);
+	fill: rgba(159, 118, 90, 1);
+}
+.block-color-orange {
+	color: rgba(210, 123, 45, 1);
+	fill: rgba(210, 123, 45, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 148, 52, 1);
+	fill: rgba(203, 148, 52, 1);
+}
+.block-color-teal {
+	color: rgba(80, 148, 110, 1);
+	fill: rgba(80, 148, 110, 1);
+}
+.block-color-blue {
+	color: rgba(56, 125, 201, 1);
+	fill: rgba(56, 125, 201, 1);
+}
+.block-color-purple {
+	color: rgba(154, 107, 180, 1);
+	fill: rgba(154, 107, 180, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(207, 81, 72, 1);
+	fill: rgba(207, 81, 72, 1);
+}
+.block-color-default_background {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray_background {
+	background: rgba(240, 239, 237, 1);
+}
+.block-color-brown_background {
+	background: rgba(245, 237, 233, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 235, 222, 1);
+}
+.block-color-yellow_background {
+	background: rgba(249, 243, 220, 1);
+}
+.block-color-teal_background {
+	background: rgba(232, 241, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(229, 242, 252, 1);
+}
+.block-color-purple_background {
+	background: rgba(243, 235, 249, 1);
+}
+.block-color-pink_background {
+	background: rgba(250, 233, 241, 1);
+}
+.block-color-red_background {
+	background: rgba(252, 233, 231, 1);
+}
+.select-value-color-default { background-color: rgba(42, 28, 0, 0.07); }
+.select-value-color-gray { background-color: rgba(28, 19, 1, 0.11); }
+.select-value-color-brown { background-color: rgba(127, 51, 0, 0.156); }
+.select-value-color-orange { background-color: rgba(196, 88, 0, 0.203); }
+.select-value-color-yellow { background-color: rgba(209, 156, 0, 0.282); }
+.select-value-color-green { background-color: rgba(0, 96, 38, 0.156); }
+.select-value-color-blue { background-color: rgba(0, 118, 217, 0.203); }
+.select-value-color-purple { background-color: rgba(92, 0, 163, 0.141); }
+.select-value-color-pink { background-color: rgba(183, 0, 78, 0.152); }
+.select-value-color-red { background-color: rgba(206, 24, 0, 0.164); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="2e8c434b-f602-80c6-a755-facd224313b6" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🎨</span></div><h1 class="page-title" dir="auto">화면 설계서<strong>(UI Design Specification)</strong></h1><p class="page-description" dir="auto"></p></header><div class="page-body"><div style="display:contents" dir="auto"><p id="2e8c434b-f602-80e5-9dae-d98db56198b6" class="">
+</p></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-80e2-880d-f2788ee32d78"/></div><div style="display:contents" dir="ltr"><figure id="2e8c434b-f602-8034-b3c0-f9d7bc855b0a"><div class="source"><a href="%ED%99%94%EB%A9%B4_%EC%84%A4%EA%B3%84%EC%84%9C(UI_Design_Specification)_2e8c434bf60280c6a755facd224313b6.md">화면 설계서(UI Design Specification) 2e8c434bf60280c6a755facd224313b6.md</a></div></figure></div><div style="display:contents" dir="ltr"><figure id="2e8c434b-f602-80c7-a6ac-c0cf6137d726" class="image"><a href="image.png"><img style="width:2559px" src="image.png"/></a></figure></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-8092-8ad2-c654b1f8075c"/></div><div style="display:contents" dir="auto"><p id="2e8c434b-f602-8025-9a47-c7f64dde81f7" class="">
+</p></div><div style="display:contents" dir="auto"><h2 id="2e8c434b-f602-8069-ab0e-d343f3ef7255" class="">1. 문서 정보</h2></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-8029-b0e0-d673e3c61dcc" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80ec-9986-c74986e6d3ed"><th id="Y[]Y" class="simple-table-header-color simple-table-header">항목</th><th id="fnUj" class="simple-table-header-color simple-table-header">내용</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80a6-958b-fb7e56e2aa8e"><td id="Y[]Y" class=""><strong>프로젝트명</strong></td><td id="fnUj" class="">가비아 클라우드 서비스 지표 대시보드</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8074-8812-cafb05ffcfa0"><td id="Y[]Y" class=""><strong>문서 버전</strong></td><td id="fnUj" class="">v1.0</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-801e-aa73-c9ecd587f918"><td id="Y[]Y" class=""><strong>작성자</strong></td><td id="fnUj" class="">Ted(신태선)</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80bb-85b9-eb7a5db60256"><td id="Y[]Y" class=""><strong>작성일</strong></td><td id="fnUj" class="">2026-01-14</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80e8-8d94-ca6756df0814"><td id="Y[]Y" class=""><strong>최종 수정일</strong></td><td id="fnUj" class="">2026-01-14</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8096-be7d-f318808ba922"><td id="Y[]Y" class=""><strong>상태</strong></td><td id="fnUj" class="">🟢 완료</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-80dd-abeb-e9cb8452c764"/></div><div style="display:contents" dir="auto"><h2 id="2e8c434b-f602-8092-bb5d-f05fa1a37d5b" class="">2. 디자인 링크</h2></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-8053-ab68-e4b5a6dc01eb" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80f9-9035-c669c2c051ac"><th id="uUX]" class="simple-table-header-color simple-table-header">구분</th><th id="KmJY" class="simple-table-header-color simple-table-header">링크</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8019-9768-de90589a292d"><td id="uUX]" class=""><strong>Figma</strong></td><td id="KmJY" class="">[여기에 피그마 링크 삽입]</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-807e-a397-d4c52e7054af"><td id="uUX]" class=""><strong>프로토타입</strong></td><td id="KmJY" class="">-</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-80ac-98d6-cc42869c3354"/></div><div style="display:contents" dir="auto"><h2 id="2e8c434b-f602-80f2-823f-c76cbf24a22e" class="">3. 화면 구성 요약</h2></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-80de-99b5-c927ce020f50" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-809d-a301-f606fde1aa4d"><th id="Ty&lt;C" class="simple-table-header-color simple-table-header">영역</th><th id="_o&gt;_" class="simple-table-header-color simple-table-header">구성 요소</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80ba-82c4-e74eea861419"><td id="Ty&lt;C" class=""><strong>헤더</strong></td><td id="_o&gt;_" class="">타이틀 (프로젝트명 + 작성자)</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8094-9329-e22369c0099d"><td id="Ty&lt;C" class=""><strong>사이드바</strong></td><td id="_o&gt;_" class="">슬라이더 필터, 체크박스 필터, 초기화 버튼</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80a0-8fef-fbed86be675c"><td id="Ty&lt;C" class=""><strong>상단</strong></td><td id="_o&gt;_" class="">KPI 카드 3개 (건수, 비중, 금액)</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8099-bfa2-fa9668804200"><td id="Ty&lt;C" class=""><strong>중단</strong></td><td id="_o&gt;_" class="">데이터 테이블 + 산점도 차트</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80b2-8ef1-c12b40d9e25a"><td id="Ty&lt;C" class=""><strong>하단</strong></td><td id="_o&gt;_" class="">바이올린 플롯</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-80f2-b83a-ca2de6306327"/></div><div style="display:contents" dir="auto"><h2 id="2e8c434b-f602-8098-b6ac-f38c88f011d7" class="">4. 디자인 시스템</h2></div><div style="display:contents" dir="auto"><h3 id="2e8c434b-f602-801f-934a-cb56932dadcf" class="">4.1 색상</h3></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-8061-953a-fd5190e589a1" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80ed-a88a-cbf2a54db3de"><th id="WaRH" class="simple-table-header-color simple-table-header">용도</th><th id="QGpF" class="simple-table-header-color simple-table-header">색상 코드</th><th id="zvv~" class="simple-table-header-color simple-table-header">미리보기</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-805f-86a5-c90a1466944c"><td id="WaRH" class="">Primary</td><td id="QGpF" class=""><code>#0D6EFD</code></td><td id="zvv~" class="">🔵</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8072-b128-d74231454952"><td id="WaRH" class="">Background</td><td id="QGpF" class=""><code>#FFFFFF</code></td><td id="zvv~" class="">⬜</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8060-ab1f-f41e80ee4c4a"><td id="WaRH" class="">Card BG</td><td id="QGpF" class=""><code>#F8F9FA</code></td><td id="zvv~" class="">🔲</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8055-b4fd-d38a7a1e83dd"><td id="WaRH" class="">Text Dark</td><td id="QGpF" class=""><code>#212529</code></td><td id="zvv~" class="">⬛</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-803c-a8e7-e4fe0b756ba5"><td id="WaRH" class="">Text Muted</td><td id="QGpF" class=""><code>#6C757D</code></td><td id="zvv~" class="">🔘</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8008-b8dd-f6dcc19e20ed"><td id="WaRH" class="">Border</td><td id="QGpF" class=""><code>#DEE2E6</code></td><td id="zvv~" class="">▫️</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h3 id="2e8c434b-f602-8081-aceb-ed2a2456be65" class="">4.2 타이포그래피</h3></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-80c8-8ce8-f0b0601f3ef7" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-806f-aa31-e66c0b4124f2"><th id="][dI" class="simple-table-header-color simple-table-header">용도</th><th id="]|tY" class="simple-table-header-color simple-table-header">폰트</th><th id=";Z]G" class="simple-table-header-color simple-table-header">크기</th><th id="@N_s" class="simple-table-header-color simple-table-header">굵기</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80ac-ab79-f9ce98283fb6"><td id="][dI" class="">페이지 타이틀</td><td id="]|tY" class="">Pretendard</td><td id=";Z]G" class="">16px</td><td id="@N_s" class="">Semi-bold</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-809a-be07-f65475be91a8"><td id="][dI" class="">카드 타이틀</td><td id="]|tY" class="">Pretendard</td><td id=";Z]G" class="">14px</td><td id="@N_s" class="">Semi-bold</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8019-9d52-fae170cc8d05"><td id="][dI" class="">KPI 값</td><td id="]|tY" class="">Pretendard</td><td id=";Z]G" class="">28px</td><td id="@N_s" class="">Bold</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-800b-b403-ead8fc4d23a6"><td id="][dI" class="">본문</td><td id="]|tY" class="">Pretendard</td><td id=";Z]G" class="">14px</td><td id="@N_s" class="">Regular</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-805c-9beb-fdaa75827994"><td id="][dI" class="">캡션</td><td id="]|tY" class="">Pretendard</td><td id=";Z]G" class="">12px</td><td id="@N_s" class="">Regular</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><h3 id="2e8c434b-f602-804e-b5f0-fae6a2bbbf1d" class="">4.3 간격</h3></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-8008-9fa9-f6f09310c3cf" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-805b-a58e-f5d97f673047"><th id="f`ok" class="simple-table-header-color simple-table-header">구분</th><th id="g{qe" class="simple-table-header-color simple-table-header">값</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80f2-9853-f7f6467186d8"><td id="f`ok" class="">카드 패딩</td><td id="g{qe" class="">20px</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-807b-8add-d9b59e14b0aa"><td id="f`ok" class="">섹션 간격</td><td id="g{qe" class="">24px</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80a1-adc7-e9e6d523556a"><td id="f`ok" class="">카드 간격</td><td id="g{qe" class="">16px</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80a6-ab3a-e0e94aa69113"><td id="f`ok" class="">사이드바 너비</td><td id="g{qe" class="">280px</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-8016-b24c-d152b80bef91"/></div><div style="display:contents" dir="auto"><h2 id="2e8c434b-f602-801b-9c93-dd63667c23ce" class="">5. 컴포넌트 목록</h2></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-80ce-96be-d59736c21d7e" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80ff-89de-d35b4c924e40"><th id="R[YS" class="simple-table-header-color simple-table-header">#</th><th id="VGbR" class="simple-table-header-color simple-table-header">컴포넌트</th><th id="L??U" class="simple-table-header-color simple-table-header">타입</th><th id="tM&gt;R" class="simple-table-header-color simple-table-header">상태</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80c3-8890-f69988a8eaa6"><td id="R[YS" class="">1</td><td id="VGbR" class="">레인지 슬라이더</td><td id="L??U" class="">Input</td><td id="tM&gt;R" class="">기본/드래그</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80ef-8e82-c8f4a57c3be6"><td id="R[YS" class="">2</td><td id="VGbR" class="">체크박스</td><td id="L??U" class="">Input</td><td id="tM&gt;R" class="">체크/미체크</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-80b1-a516-d1e5e64c5582"><td id="R[YS" class="">3</td><td id="VGbR" class="">버튼 (Primary)</td><td id="L??U" class="">Button</td><td id="tM&gt;R" class="">기본/호버</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-808b-8490-faa69a3ee284"><td id="R[YS" class="">4</td><td id="VGbR" class="">Value Box 카드</td><td id="L??U" class="">Card</td><td id="tM&gt;R" class="">-</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8078-9043-d8cb7b12f6d9"><td id="R[YS" class="">5</td><td id="VGbR" class="">데이터 테이블</td><td id="L??U" class="">Table</td><td id="tM&gt;R" class="">-</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8000-9d00-fa320af48cbf"><td id="R[YS" class="">6</td><td id="VGbR" class="">산점도 차트</td><td id="L??U" class="">Chart</td><td id="tM&gt;R" class="">-</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-808a-9367-ca360c342177"><td id="R[YS" class="">7</td><td id="VGbR" class="">바이올린 플롯</td><td id="L??U" class="">Chart</td><td id="tM&gt;R" class="">-</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-8009-845f-d46941095878"/></div><div style="display:contents" dir="auto"><h2 id="2e8c434b-f602-8040-b2e4-e4e881b32402" class="">6. 반응형 정의</h2></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-8072-ab62-dcf5214067ba" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-808f-ae29-d48228b0d717"><th id="HKSh" class="simple-table-header-color simple-table-header">디바이스</th><th id="y?\a" class="simple-table-header-color simple-table-header">너비</th><th id="Dv[I" class="simple-table-header-color simple-table-header">사이드바</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8086-925c-c4ce620871cc"><td id="HKSh" class="">Desktop</td><td id="y?\a" class="">1440px+</td><td id="Dv[I" class="">표시</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8055-b0cd-c05b5bd2b07f"><td id="HKSh" class="">Tablet</td><td id="y?\a" class="">768px~1439px</td><td id="Dv[I" class="">접힘</td></tr></div><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-801d-bb39-cdbdd2ced33d"><td id="HKSh" class="">Mobile</td><td id="y?\a" class="">~767px</td><td id="Dv[I" class="">숨김</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-805f-874a-eae77430e24e"/></div><div style="display:contents" dir="auto"><h2 id="2e8c434b-f602-8085-b973-d42ade9ea8b4" class="">7. 변경 이력</h2></div><div style="display:contents" dir="ltr"><table id="2e8c434b-f602-8054-9910-d944ed4d8a5d" class="simple-table"><thead class="simple-table-header"><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-8047-8abb-e63526382a93"><th id="k]N_" class="simple-table-header-color simple-table-header">버전</th><th id="S:GB" class="simple-table-header-color simple-table-header">일자</th><th id="YvvE" class="simple-table-header-color simple-table-header">작성자</th><th id="biuQ" class="simple-table-header-color simple-table-header">변경 내용</th></tr></div></thead><tbody><div style="display:contents" dir="ltr"><tr id="2e8c434b-f602-809b-a339-e21741a920d5"><td id="k]N_" class="">v1.0</td><td id="S:GB" class="">2026-01-14</td><td id="YvvE" class="">Ted(신태선)</td><td id="biuQ" class="">최초 작성</td></tr></div></tbody></table></div><div style="display:contents" dir="auto"><hr id="2e8c434b-f602-8071-b375-d77e5ff1ca8a"/></div><div style="display:contents" dir="auto"><h2 id="2e8c434b-f602-8007-aae6-df5858375b0d" class="">8. 산출물</h2></div><div style="display:contents" dir="ltr"><figure id="2e8c434b-f602-808a-aa25-f6e7db5218d0"><a href="https://leaves-glory-09383861.figma.site/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Cloud Service Analytics Dashboard</div><div class="bookmark-description">Analyze cloud service metrics with an intuitive dashboard featuring KPIs, data tables, and visualizations, designed for efficient decision-making.</div></div><div class="bookmark-href"><img src="https://leaves-glory-09383861.figma.site/favicon.ico" class="icon bookmark-icon"/>https://leaves-glory-09383861.figma.site/</div></div></a></figure></div><div style="display:contents" dir="ltr"><figure id="2e8c434b-f602-8012-9a5f-f6dee0b80f90"><a href="https://www.figma.com/make/4kTN4jcBbLQkoHui8AnFTG/Cloud-Service-Analytics-Dashboard?t=04q38gDeD85bCnP1-1" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Cloud Service Analytics Dashboard</div><div class="bookmark-description">Created with Figma</div></div><div class="bookmark-href"><img src="https://static.figma.com/uploads/1a667ef53b7c4837049399d0593ffca39e0bec9e" class="icon bookmark-icon"/>https://www.figma.com/make/4kTN4jcBbLQkoHui8AnFTG/Cloud-Service-Analytics-Dashboard?t=04q38gDeD85bCnP1-1</div></div><img src="https://www.figma.com/file/4kTN4jcBbLQkoHui8AnFTG/thumbnail?ver=thumbnails%2F57a4ae78-83c0-4339-9a42-e45486780c9d&amp;t=04q38gDeD85bCnP1-1" class="bookmark-image"/></a></figure></div><div style="display:contents" dir="ltr"><figure id="2e8c434b-f602-80eb-a397-f712714305d9" class="image"><a href="image%201.png"><img style="width:2559px" src="image%201.png"/></a></figure></div><div style="display:contents" dir="auto"><p id="2e8c434b-f602-8080-b99f-c8df4ab521fd" class="">
+</p></div></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

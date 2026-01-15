@@ -1,0 +1,179 @@
+
+<!DOCTYPE html>
+<html>
+<head><base href="_w_29d7500e11434f6a898a2a89f407ab42/">
+
+<meta charset="utf-8"/>
+<script type="application/html-dependencies">requirejs[2.3.6];jquery[3.6.0];shiny[1.5.1];shiny-busy-indicators[1.5.1];bootstrap[5.3.1];bslib-components[0.9.0.9002];ionrangeslider[2.3.1];strftime[0.9.2];bootstrap-datepicker[1.9.0];selectize[0.12.6];headcontent_496a5a4acc46d0c6018d05cfbfa51efa8070e56e[0.0];htmltools-fill[0.5.8.9000];shiny-data-frame-output[1.5.1];include-css-ff11e41c6027ca8878442c61ea2c7e3c89501c70[0.0];headcontent_fd6a84bc11bfe915d9b18fdac3cc428e21f50bd7[0.0]</script>
+<script src="lib/requirejs-2.3.6/require.min.js"></script>
+<script src="lib/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="lib/shiny-1.5.1/shiny.js"></script>
+<link href="lib/shiny-busy-indicators-1.5.1/busy-indicators.css" rel="stylesheet"/>
+<script>document.documentElement.dataset.shinyBusySpinners = true;document.documentElement.dataset.shinyBusyPulse = true;</script>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<link href="lib/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet"/>
+<script src="lib/bootstrap-5.3.1/bootstrap.bundle.min.js"></script>
+<script src="lib/bslib-components-0.9.0.9002/components.min.js"></script>
+<script src="lib/bslib-components-0.9.0.9002/web-components.min.js" type="module"></script>
+<script src="lib/ionrangeslider-2.3.1/js/ion.rangeSlider.min.js"></script>
+<script src="lib/strftime-0.9.2/strftime-min.js"></script>
+<script src="lib/bootstrap-datepicker-1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script>(function() { var datepicker = $.fn.datepicker.noConflict(); $.fn.bsDatepicker = datepicker; })();</script>
+<script src="lib/selectize-0.12.6/js/selectize.min.js"></script>
+<script src="lib/selectize-0.12.6/accessibility/js/selectize-plugin-a11y.min.js"></script>
+<style>html { height: 100%; }</style>
+<link href="lib/htmltools-fill-0.5.8.9000/fill.css" rel="stylesheet"/>
+<script src="lib/shiny-data-frame-output-1.5.1/data-frame.js" type="module"></script>
+<title>가비아 클라우드 | 서비스 지표 대시보드 | Ted(신태선)-클라우드기획팀 </title>
+<script src="__assets__/sockjs.min.js"></script>
+<script src="__assets__/shiny-server-client.min.js"></script>
+<script>
+preShinyInit({
+reconnect:true,
+reconnectTimeout:15000,
+disableProtocols:["htmlfile","xdr-streaming","xdr-polling","websocket"],
+token:true,
+workerId:true,
+subappTag:true,
+extendSession:true,
+fixupInternalLinks:true
+});
+</script>
+<link rel="stylesheet" type="text/css" href="__assets__/rstudio-connect.css">
+</head>
+<body class="bslib-page-fill bslib-gap-spacing bslib-flow-mobile bslib-page-sidebar html-fill-container" style="padding:0;gap:0;">
+<div class="navbar navbar-static-top">
+<div class="container-fluid">
+<h1 class="bslib-page-title navbar-brand">가비아 클라우드 | 서비스 지표 대시보드 | Ted(신태선)-클라우드기획팀 </h1>
+</div>
+</div>
+<div class="bslib-sidebar-layout bslib-mb-spacing html-fill-item" data-bslib-sidebar-init="true" data-open-desktop="open" data-open-mobile="closed" data-collapsible-mobile="true" data-collapsible-desktop="true" data-bslib-sidebar-border="false" data-bslib-sidebar-border-radius="false" style="--_sidebar-width:250.000000px;">
+<div class="main bslib-gap-spacing html-fill-container">
+<main class="bslib-page-main bslib-gap-spacing html-fill-item html-fill-container">
+<bslib-layout-columns class="bslib-grid grid bslib-mb-spacing " style="">
+<div class="bslib-gap-spacing bslib-grid-item html-fill-container">
+<div class="card bslib-card bslib-mb-spacing bslib-value-box default showcase-left-center html-fill-item html-fill-container" data-bslib-card-init="">
+<div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto; padding:0;">
+<div class="value-box-grid html-fill-item" style="--bslib-grid-height:auto;--bslib-grid-height-mobile:auto;---bslib-value-box-showcase-w:30%;---bslib-value-box-showcase-w-fs:1fr;---bslib-value-box-showcase-max-h:100px;---bslib-value-box-showcase-max-h-fs:67%;">
+<div class="value-box-showcase html-fill-item html-fill-container">
+<svg viewBox="0 0 448 512" preserveAspectRatio="none" aria-hidden="true" role="img" class="fa" style="fill:currentColor;height:1em;width:0.88em;margin-left:auto;margin-right:0.2em;position:relative;vertical-align:-0.125em;overflow:visible;"> <path d="M272 304h-96C78.8 304 0 382.8 0 480c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32C448 382.8 369.2 304 272 304zM48.99 464C56.89 400.9 110.8 352 176 352h96c65.16 0 119.1 48.95 127 112H48.99zM224 256c70.69 0 128-57.31 128-128c0-70.69-57.31-128-128-128S96 57.31 96 128C96 198.7 153.3 256 224 256zM224 48c44.11 0 80 35.89 80 80c0 44.11-35.89 80-80 80S144 172.1 144 128C144 83.89 179.9 48 224 48z"></path></svg>
+</div>
+<div class="value-box-area html-fill-item html-fill-container">
+<div class="value-box-title html-fill-item html-fill-container">
+<p>조회 대상 건수(샘플)</p>
+</div>
+<div class="value-box-value html-fill-item html-fill-container">
+<div class="shiny-html-output" id="total_rows"></div>
+</div>
+</div>
+</div>
+</div>
+<script data-bslib-card-init="">window.bslib.Card.initializeAllCards();</script>
+</div>
+</div>
+<div class="bslib-gap-spacing bslib-grid-item html-fill-container">
+<div class="card bslib-card bslib-mb-spacing bslib-value-box default showcase-left-center html-fill-item html-fill-container" data-bslib-card-init="">
+<div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto; padding:0;">
+<div class="value-box-grid html-fill-item" style="--bslib-grid-height:auto;--bslib-grid-height-mobile:auto;---bslib-value-box-showcase-w:30%;---bslib-value-box-showcase-w-fs:1fr;---bslib-value-box-showcase-max-h:100px;---bslib-value-box-showcase-max-h-fs:67%;">
+<div class="value-box-showcase html-fill-item html-fill-container">
+<svg viewBox="0 0 512 512" preserveAspectRatio="none" aria-hidden="true" role="img" class="fa" style="fill:currentColor;height:1em;width:1.0em;margin-left:auto;margin-right:0.2em;position:relative;vertical-align:-0.125em;overflow:visible;"> <path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V192c0-35.3-28.7-64-64-64H80c-8.8 0-16-7.2-16-16s7.2-16 16-16H448c17.7 0 32-14.3 32-32s-14.3-32-32-32H64zM416 336c-17.7 0-32-14.3-32-32s14.3-32 32-32s32 14.3 32 32s-14.3 32-32 32z"></path></svg>
+</div>
+<div class="value-box-area html-fill-item html-fill-container">
+<div class="value-box-title html-fill-item html-fill-container">
+<p>평균 오버리지 비중(샘플)</p>
+</div>
+<div class="value-box-value html-fill-item html-fill-container">
+<div class="shiny-html-output" id="avg_overage_ratio"></div>
+</div>
+</div>
+</div>
+</div>
+<script data-bslib-card-init="">window.bslib.Card.initializeAllCards();</script>
+</div>
+</div>
+<div class="bslib-gap-spacing bslib-grid-item html-fill-container">
+<div class="card bslib-card bslib-mb-spacing bslib-value-box default showcase-left-center html-fill-item html-fill-container" data-bslib-card-init="">
+<div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto; padding:0;">
+<div class="value-box-grid html-fill-item" style="--bslib-grid-height:auto;--bslib-grid-height-mobile:auto;---bslib-value-box-showcase-w:30%;---bslib-value-box-showcase-w-fs:1fr;---bslib-value-box-showcase-max-h:100px;---bslib-value-box-showcase-max-h-fs:67%;">
+<div class="value-box-showcase html-fill-item html-fill-container">
+<svg viewBox="0 0 320 512" preserveAspectRatio="none" aria-hidden="true" role="img" class="fa" style="fill:currentColor;height:1em;width:0.62em;margin-left:auto;margin-right:0.2em;position:relative;vertical-align:-0.125em;overflow:visible;"> <path d="M160 0c17.7 0 32 14.3 32 32V67.7c1.6 .2 3.1 .4 4.7 .7c10.6 1.6 42.1 6.7 55.1 10c17.1 4.3 27.5 21.7 23.2 38.9s-21.7 27.5-38.9 23.2c-9.3-2.4-37.6-7-48.9-8.7c-32.1-4.8-59.6-2.4-78.5 4.9c-18.3 7-25.9 16.9-27.9 28c-1.9 10.7-.5 16.8 1.3 20.6c1.9 4 5.6 8.5 12.9 13.4c16.2 10.8 41.1 17.9 73.3 26.7l2.8 .8c28.4 7.7 63.2 17.2 89 34.3c14.1 9.4 27.3 22.1 35.5 39.7c8.3 17.8 10.1 37.8 6.3 59.1c-6.9 38-33.1 63.4-65.6 76.7c-13.7 5.6-28.6 9.2-44.4 11V480c0 17.7-14.3 32-32 32s-32-14.3-32-32V445.1c-.4-.1-.9-.1-1.3-.2l-.2 0 0 0c-24.4-3.8-64.5-14.3-91.5-26.3c-16.2-7.2-23.4-26.1-16.2-42.2s26.1-23.4 42.2-16.2c20.9 9.3 55.3 18.4 75.2 21.6c31.9 4.7 58.2 2 76-5.3c16.9-6.9 24.6-16.9 26.8-28.9c1.9-10.7 .5-16.8-1.3-20.6c-1.9-4-5.6-8.5-12.9-13.4c-16.2-10.8-41.1-17.9-73.3-26.7l-2.8-.8c-28.4-7.7-63.2-17.2-89-34.3c-14.1-9.4-27.3-22.1-35.5-39.7c-8.3-17.8-10.1-37.8-6.3-59.1C25 114.1 53 89.3 86 76.7c13-5 27.2-8.2 42-10V32c0-17.7 14.3-32 32-32z"></path></svg>
+</div>
+<div class="value-box-area html-fill-item html-fill-container">
+<div class="value-box-title html-fill-item html-fill-container">
+<p>평균 월 과금(샘플)</p>
+</div>
+<div class="value-box-value html-fill-item html-fill-container">
+<div class="shiny-html-output" id="avg_monthly_cost"></div>
+</div>
+</div>
+</div>
+</div>
+<script data-bslib-card-init="">window.bslib.Card.initializeAllCards();</script>
+</div>
+</div>
+</bslib-layout-columns>
+<bslib-layout-columns class="bslib-grid grid bslib-mb-spacing html-fill-item" col-widths-sm="6,6,12" style="">
+<div class="bslib-gap-spacing bslib-grid-item html-fill-container">
+<div id="bslib_card_5b9f4f" class="card bslib-card bslib-mb-spacing html-fill-item html-fill-container" data-bslib-card-init="" data-full-screen="false">
+<div class="card-header">원천 데이터 미리보기 (목업)</div>
+<div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto;">
+<shiny-data-frame id="table" class="html-fill-item html-fill-container"></shiny-data-frame>
+</div>
+<bslib-tooltip placement="auto"><template style="display:none;">Expand</template><button class="bslib-full-screen-enter badge rounded-pill" aria-expanded="false" aria-controls="bslib_card_5b9f4f" aria-label="Expand card"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="height:1em;width:1em;fill:currentColor;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"/></svg></button></bslib-tooltip>
+<script data-bslib-card-init="">window.bslib.Card.initializeAllCards();</script>
+</div>
+</div>
+<div class="bslib-gap-spacing bslib-grid-item html-fill-container">
+<div id="bslib_card_50c9ef" class="card bslib-card bslib-mb-spacing html-fill-item html-fill-container" data-bslib-card-init="" data-full-screen="false">
+<div class="card-header d-flex justify-content-between align-items-center">
+월 과금 vs 오버리지 (상관관계)<bslib-popover placement="top" bsOptions="{}"><template> <div style="display:contents;"> <div id="scatter_color" class="form-group shiny-input-radiogroup shiny-input-container shiny-input-container-inline" role="radiogroup" aria-labelledby="scatter_color-label"> <label class="control-label shiny-label-null" id="scatter_color-label" for="scatter_color"></label> <div class="shiny-options-group"> <label class="radio-inline"> <input type="radio" name="scatter_color" value="none" checked="checked"/> <span>없음</span> </label> <label class="radio-inline"> <input type="radio" name="scatter_color" value="customer_segment"/> <span>고객 세그먼트</span> </label> <label class="radio-inline"> <input type="radio" name="scatter_color" value="promo_applied"/> <span>프로모션 적용</span> </label> <label class="radio-inline"> <input type="radio" name="scatter_color" value="weekday"/> <span>요일</span> </label> <label class="radio-inline"> <input type="radio" name="scatter_color" value="traffic_window"/> <span>트래픽 구간</span> </label> </div> </div> </div> <div style="display:contents;">색상 기준</div></template><svg viewBox="0 0 448 512" preserveAspectRatio="none" aria-hidden="true" role="img" class="fa" style="fill:currentColor;height:1em;width:0.88em;margin-left:auto;margin-right:0.2em;position:relative;vertical-align:-0.125em;overflow:visible;"> <path d="M120 256c0 30.9-25.1 56-56 56s-56-25.1-56-56s25.1-56 56-56s56 25.1 56 56zm160 0c0 30.9-25.1 56-56 56s-56-25.1-56-56s25.1-56 56-56s56 25.1 56 56zm104 56c-30.9 0-56-25.1-56-56s25.1-56 56-56s56 25.1 56 56s-25.1 56-56 56z"></path></svg></bslib-popover>
+</div>
+<div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto;">
+<div id="scatterplot" class="shiny-image-output html-fill-item shiny-plot-output" style="width:100%;height:400px;"></div>
+</div>
+<bslib-tooltip placement="auto"><template style="display:none;">Expand</template><button class="bslib-full-screen-enter badge rounded-pill" aria-expanded="false" aria-controls="bslib_card_50c9ef" aria-label="Expand card"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="height:1em;width:1em;fill:currentColor;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"/></svg></button></bslib-tooltip>
+<script data-bslib-card-init="">window.bslib.Card.initializeAllCards();</script>
+</div>
+</div>
+<div class="bslib-gap-spacing bslib-grid-item html-fill-container">
+<div id="bslib_card_d289e8" class="card bslib-card bslib-mb-spacing html-fill-item html-fill-container" data-bslib-card-init="" data-full-screen="false">
+<div class="card-header d-flex justify-content-between align-items-center">
+오버리지 비중 분포 (그룹별)<bslib-popover placement="auto" bsOptions="{}"><template> <div style="display:contents;"> <div id="ratio_split_by" class="form-group shiny-input-radiogroup shiny-input-container shiny-input-container-inline" role="radiogroup" aria-labelledby="ratio_split_by-label"> <label class="control-label" id="ratio_split_by-label" for="ratio_split_by">그룹:</label> <div class="shiny-options-group"> <label class="radio-inline"> <input type="radio" name="ratio_split_by" value="customer_segment"/> <span>고객 세그먼트</span> </label> <label class="radio-inline"> <input type="radio" name="ratio_split_by" value="promo_applied"/> <span>프로모션 적용</span> </label> <label class="radio-inline"> <input type="radio" name="ratio_split_by" value="weekday" checked="checked"/> <span>요일</span> </label> <label class="radio-inline"> <input type="radio" name="ratio_split_by" value="traffic_window"/> <span>트래픽 구간</span> </label> </div> </div> </div> <div style="display:contents;">분석 기준 선택</div></template><svg viewBox="0 0 448 512" preserveAspectRatio="none" aria-hidden="true" role="img" class="fa" style="fill:currentColor;height:1em;width:0.88em;margin-left:auto;margin-right:0.2em;position:relative;vertical-align:-0.125em;overflow:visible;"> <path d="M120 256c0 30.9-25.1 56-56 56s-56-25.1-56-56s25.1-56 56-56s56 25.1 56 56zm160 0c0 30.9-25.1 56-56 56s-56-25.1-56-56s25.1-56 56-56s56 25.1 56 56zm104 56c-30.9 0-56-25.1-56-56s25.1-56 56-56s56 25.1 56 56s-25.1 56-56 56z"></path></svg></bslib-popover>
+</div>
+<div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto;">
+<div id="overage_ratio_dist" class="shiny-image-output html-fill-item shiny-plot-output" style="width:100%;height:400px;"></div>
+</div>
+<bslib-tooltip placement="auto"><template style="display:none;">Expand</template><button class="bslib-full-screen-enter badge rounded-pill" aria-expanded="false" aria-controls="bslib_card_d289e8" aria-label="Expand card"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="height:1em;width:1em;fill:currentColor;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"/></svg></button></bslib-tooltip>
+<script data-bslib-card-init="">window.bslib.Card.initializeAllCards();</script>
+</div>
+</div>
+</bslib-layout-columns>
+<link href="lib/include-css-ff11e41c6027ca8878442c61ea2c7e3c89501c70-0.0/styles.css" rel="stylesheet"/>
+</main>
+</div>
+<aside id="bslib_sidebar_375c7f" class="sidebar" hidden="true">
+<div class="sidebar-content bslib-gap-spacing">
+<div class="form-group shiny-input-container">
+<label class="control-label" id="monthly_cost-label" for="monthly_cost">월 과금 범위(원)</label><input class="js-range-slider" id="monthly_cost" data-skin="shiny" data-min="90000" data-max="1650000" data-from="90000" data-step="1" data-grid="false" data-grid-snap="false" data-prettify-separator="," data-prettify-enabled="true" data-prefix="₩" data-keyboard="true" data-data-type="number" data-type="double" data-to="1650000" data-drag-interval="true"/>
+</div>
+<div id="traffic_window" class="form-group shiny-input-checkboxgroup shiny-input-container shiny-input-container-inline" role="group" aria-labelledby="traffic_window-label">
+<label class="control-label" id="traffic_window-label" for="traffic_window">트래픽 구간</label>
+<div class="shiny-options-group">
+<label class="checkbox-inline">
+<input type="checkbox" name="traffic_window" value="BUSINESS" checked="checked"/> <span>업무시간</span>
+</label>
+<label class="checkbox-inline">
+<input type="checkbox" name="traffic_window" value="PEAK" checked="checked"/> <span>야간/피크</span>
+</label>
+</div>
+</div>
+<button class="btn btn-default action-button" id="reset" type="button">
+<span class="action-label">필터 초기화</span>
+</button>
+</div>
+</aside>
+<button class="collapse-toggle" type="button" title="Toggle sidebar" aria-expanded="true" aria-controls="bslib_sidebar_375c7f"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class="bi bi-chevron-left collapse-icon" style="fill:currentColor;" aria-hidden="true" role="img" ><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path></svg></button>
+<script data-bslib-sidebar-init="">bslib.Sidebar.initCollapsibleAll()</script>
+</div>
+</body>
+</html>
